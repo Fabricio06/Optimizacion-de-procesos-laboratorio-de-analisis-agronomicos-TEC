@@ -34,7 +34,7 @@ const Main = () => {
                 <div className='option'>
                     <h3>Creación de bitácoras</h3>
                     <p>Seleccionar el tipo de bitácora y rellenar con nuevos datos</p>
-                    <p>Ingrese <strong> aquí</strong></p>
+                    <p>Ingrese <strong> <a href='/bitacoras'>aquí</a></strong></p>
                     <img src={Icono3}/>
                 </div>
             </div>

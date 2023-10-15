@@ -5,6 +5,7 @@ import App from './components/App';
 import Login from './components/Login';
 import Registro from './components/Registro';
 import RegistroClientes from './components/RegistroClientes';
+import Bitacoras from './components/Bitacoras';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     path: "registroClientes",
     element: <RegistroClientes/>,
   },
+  {
+    path: "bitacoras",
+    element: <Bitacoras/>,
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
