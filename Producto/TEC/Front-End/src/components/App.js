@@ -11,8 +11,6 @@ const App = () => {
     <body>
       <Principal/>
     </body>
-      
-    
   );
 }
 

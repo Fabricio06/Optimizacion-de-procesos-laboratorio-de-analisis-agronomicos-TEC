@@ -13,9 +13,10 @@ datasource db {
 model Autenticar {
   id          Int     @id @default(autoincrement())
   contrasena  String
+  person_tecnico Persona_Tecnico []
 }
 
-model Person_Tecnico {
+model Persona_Tecnico {
   id                Int      @id @default(autoincrement())
   correoInstitucional String
   nombre            String
