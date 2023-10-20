@@ -14,7 +14,7 @@ const pool = new Pool({
     host: 'localhost',
     database: 'LaboratorioAnalisisAgronomicos',
     password: 'admin12345',
-    port: 5433, //5432
+    port: 5432, //5432
 });
 
 // Rutas CRUD aquí
@@ -90,6 +90,6 @@ app.delete('/api/libros/:id', async(req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log('Servidor corriendo en http://localhost:3000');
+app.listen(3001, () => {
+    console.log('Servidor corriendo en http://localhost:3001');
 });
