@@ -414,4 +414,77 @@ Body{
 }
 
 
+.menu{
+  height: 80px;
+  width: 100%;
+  background-color: #2B4e62;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1; 
+  top: 0;
 
+}
+
+.registroclientes{
+  min-height: 100vh;
+  background-color: #2B4e62;
+}
+
+.registroclientes .contenedor{
+  padding: 5px 20px 20px 20px;
+}
+
+.registroclientes .encabezado h2{
+  background-color: #4C83A3;
+  height: 50px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: white;
+}
+
+.registroclientes .datos{
+  background-color: #BBD6E6;
+  padding: 30px;
+  height: 100%;
+}
+
+
+.datosclientes form ul li{
+  display: inline-grid;
+  margin: 20px;
+
+}
+
+.datosclientes button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border-style: none;
+  width: 60px;
+  height: 50px;
+}
+
+.eliminareditarclientes .contenedor{
+  background-color: #BBD6E6;
+}
+
+.eliminareditarclientes .encabezado{
+  padding: 30px;
+}
+
+.eliminareditarclientes .botones{
+  display: flex;
+  justify-content: end;
+  padding: 30px;
+}
+
+.eliminareditarclientes .boton{
+  margin-right: 30px;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+}

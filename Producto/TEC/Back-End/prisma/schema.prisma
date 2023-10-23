@@ -10,18 +10,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Autenticar {
+model autenticar {
   id          Int     @id @default(autoincrement())
   contrasena  String
-  person_tecnico Persona_Tecnico []
+  person_tecnico persona_tecnico []
 }
 
-model Persona_Tecnico {
+model persona_tecnico {
   id                Int      @id @default(autoincrement())
   correoInstitucional String
   nombre            String
   apellido1         String
   apellido2         String
-  autenticar         Autenticar @relation(fields: [autenticarId], references: [id])
+  autenticar         autenticar @relation(fields: [autenticarId], references: [id])
   autenticarId       Int
+}
+
+model persona_cliente{
+  id              Int @id @default(autoincrement())
+  cedula          Int @unique
+  empresa         String
+  telefono        String
+  email_informe   String
+  email_factura   String
+  provincia       String
+  canton          String
+  distrito        String
+  otras_senas     String
+  cultivo         String
+  boleta          String
 }

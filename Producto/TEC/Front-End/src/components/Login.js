@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Principal from './Principal';
 
 const Login = () => {
     return(

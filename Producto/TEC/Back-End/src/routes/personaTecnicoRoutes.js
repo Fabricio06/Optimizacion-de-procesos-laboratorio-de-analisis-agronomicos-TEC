@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Pool } = require('pg');
 const moment = require('moment');
-const pool = require('./dbConfig'); // Importa la configuración de la base de datos
+const pool = require('../dbConfig'); // Importa la configuración de la base de datos
 
 
 // Obtener todos los tecnicos 

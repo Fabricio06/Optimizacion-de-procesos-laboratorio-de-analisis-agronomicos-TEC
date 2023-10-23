@@ -6,7 +6,7 @@ import Menu from './Menu'
 import Footer from './Footer'
 
 
-const RegistroClientes = () =>{
+const GestionClientes = () =>{
     return(
     <div className='App2'>
             <div className='header'>
@@ -28,13 +28,13 @@ const RegistroClientes = () =>{
                 <div className='option2'>
                     <h3>Registro de clientes</h3>
                     <p>Registre a sus nuevos clientes</p>
-                    <p>Ingrese <strong> aquí</strong></p>
+                    <p>Ingrese <strong> <a href='/registroClientes'>aquí</a></strong></p>
                     <img src={Icono1}/>
                 </div>
                 <div className='option2'>
                     <h3>Editar o eliminar clientes</h3>
                     <p>Edite o elimine datos aquí</p>
-                    <p>Ingrese <strong> aquí</strong></p>
+                    <p>Ingrese <strong> <a href='/eliminarEditarClientes'>aquí</a></strong></p>
                     <img src={Icono2}/>
                 </div>
                 <div className='option2'>
@@ -62,4 +62,4 @@ const RegistroClientes = () =>{
 }
 
 
-export default RegistroClientes;
+export default GestionClientes;

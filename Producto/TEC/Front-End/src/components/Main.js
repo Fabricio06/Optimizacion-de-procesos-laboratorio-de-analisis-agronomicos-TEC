@@ -28,7 +28,7 @@ const Main = () => {
                 <div className='option'>
                     <h3>Gestión de Clientes</h3>
                     <p>Registro, eliminación o edición de clientes según la necesidad</p>
-                    <p>Ingrese <strong> <a href='/registroClientes'>aquí</a></strong></p>
+                    <p>Ingrese <strong> <a href='/gestionClientes'>aquí</a></strong></p>
                     <img src={Icono2}/>
                 </div>
                 <div className='option'>
