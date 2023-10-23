@@ -1,12 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const { Pool } = require('pg');
-const moment = require('moment');
-const pool = require('../dbConfig'); // Importa la configuración de la base de datos
+import {pool} from '../dbConfig.js'
 
-
-// Obtener todos los tecnicos 
-router.get('/', async(req, res) => {
+export const getPersonaTecnico = async(req, res) => {
     try {
         const result = await pool.query('SELECT * FROM lab.persona_tecnico');
         res.json(result.rows);
@@ -14,10 +8,9 @@ router.get('/', async(req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}
 
-// Obtener un tecnico por ID
-router.get('/:id', async(req, res) => {
+export const getPersonaTecnicoById = async(req, res) => {
     try {
         const { id } = req.params;
         const result = await pool.query('SELECT * FROM lab.persona_tecnico WHERE id = $1', [id]);
@@ -26,10 +19,9 @@ router.get('/:id', async(req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}
 
-// Crear un nuevo tecnico
-router.post('/', async(req, res) => {
+export const createPersonaTecnico = async(req, res) => {
     try {
         let { correoInstitucional, nombre, apellido1, apellido2, autenticarId } = req.body;
         console.log({ correoInstitucional, nombre, apellido1, apellido2, autenticarId });
@@ -39,10 +31,9 @@ router.post('/', async(req, res) => {
         console.error('Error inserting tecnico:', error);
         res.status(500).json({ error: error.message });
     }
-});
+}
 
-// Actualizar un tecnico
-router.put('/:id', async(req, res) => {
+export const updatePersonaTecnico = async(req, res) => {
     try {
         const { id } = req.params;
         const { correoInstitucional, nombre, apellido1, apellido2, autenticarId } = req.body;
@@ -52,10 +43,9 @@ router.put('/:id', async(req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}
 
-// Eliminar un tecnico
-router.delete('/:id', async(req, res) => {
+export const deletePersonaTecnico = async(req, res) => {
     try {
         const { id } = req.params;
         await pool.query('DELETE FROM lab.persona_tecnico WHERE id = $1', [id]);
@@ -64,8 +54,4 @@ router.delete('/:id', async(req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-});
-
-module.exports = router;
-
-
+}

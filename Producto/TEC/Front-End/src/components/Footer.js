@@ -5,7 +5,7 @@ const Footer = () =>{
         <div className='footer'>
             <p>Todos los derechos reservados &copy; <strong>ITCR</strong></p>
         </div>
-       
+
 
     );
 }

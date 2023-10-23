@@ -19,7 +19,6 @@ const RegistroClientes = () => {
 
   const enviarDatos = async () => {
     try {
-      alert(formData.cedula);
       // Resto del código para enviar datos
       const response = await fetch('http://localhost:3001/api/cliente/registrarCliente', {
         method: 'POST',

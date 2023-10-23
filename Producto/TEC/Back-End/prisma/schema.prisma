@@ -17,13 +17,13 @@ model autenticar {
 }
 
 model persona_tecnico {
-  id                Int      @id @default(autoincrement())
+  id                  Int      @id @default(autoincrement())
   correoInstitucional String
-  nombre            String
-  apellido1         String
-  apellido2         String
-  autenticar         autenticar @relation(fields: [autenticarId], references: [id])
-  autenticarId       Int
+  nombre              String
+  apellido1           String
+  apellido2           String
+  autenticar          autenticar @relation(fields: [autenticarId], references: [id])
+  autenticarId        Int
 }
 
 model persona_cliente{
@@ -39,4 +39,36 @@ model persona_cliente{
   otras_senas     String
   cultivo         String
   boleta          String
+  cliente_formulario cliente_formulario []
+}
+
+model cliente_formulario{
+  id Int @id @default(autoincrement())
+  persona_cliente persona_cliente @relation(fields: [clienteId], references: [id])
+  clienteId Int 
+  formulario formulario @relation(fields: [formularioId], references: [id])
+  formularioId Int
+}
+
+model formulario{
+  id            Int @id @default(autoincrement())
+  muestras muestras @relation(fields: [muestrasId], references: [id])
+  muestrasId    Int 
+  cliente_formulario cliente_formulario []
+}
+
+
+model muestras{
+  id     Int @id @default(autoincrement())
+  codigo_laboratorio String
+  identificacion_campo String
+  tipo_muestras tipo_muestras @relation(fields: [tipo_muestraId], references: [id])
+  tipo_muestraId Int
+  formulario formulario[]
+}
+
+model tipo_muestras{
+  id        Int @id @default(autoincrement())
+  nombre    String @unique
+  muestras muestras []
 }

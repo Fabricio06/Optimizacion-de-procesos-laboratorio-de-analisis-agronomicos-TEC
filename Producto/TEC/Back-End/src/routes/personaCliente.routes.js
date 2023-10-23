@@ -1,10 +1,6 @@
 import { Router } from 'express';
-//const router = express.Router();
-//const { Pool } = require('pg');
-//const pool = require('../dbConfig'); // Importa la configuración de la base de datos
-
-import {getPersonaCliente,getPersonaClienteById, createPersonaCliente, updatePersonaCliente, deletePersonaCliente} from '../controllers/personaCliente.controller.js';
-
+import {getPersonaCliente, getPersonaClienteById, createPersonaCliente, 
+        updatePersonaCliente, deletePersonaCliente} from '../controllers/personaCliente.controller.js';
 const router = Router()
 
 // Obtener todos los clientes

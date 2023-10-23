@@ -1,27 +1,17 @@
 import express from 'express'
 import cors from 'cors'
 import personaClienteRoutes from './routes/personaCliente.routes.js'
-//const express = require('express');
-//const cors = require('cors');
+import personaTecnicoRoutes from './routes/personaTecnico.routes.js'
 
 const app = express();
 
 
 
-//const personaTecnicoRoutes = require('./routes/personaTecnicoRoutes');
-//const personaClienteRoutes = require('./routes/personaClienteRoutes')
-
 app.use(cors());
 app.use(express.json());
 
 //Usar enrutador de PersonaTecnico
-//app.use('/api/register', personaTecnicoRoutes);
-
-
-
-console.log("fasf")
-
-
+app.use('/api/register', personaTecnicoRoutes);
 
 //Usar enrutador de Cliente
 app.use('/api/cliente', personaClienteRoutes);
