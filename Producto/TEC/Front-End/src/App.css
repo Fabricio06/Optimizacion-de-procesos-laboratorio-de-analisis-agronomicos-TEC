@@ -357,7 +357,7 @@ Body{
 }
 
 .login-form input[type="text"],
-.login-form input[type="password"] {
+.login-form input[type="password"],.login-form input[type="email"] {
     width: 100%;
     height: 30px;
     background: transparent;
