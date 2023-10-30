@@ -1,6 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
 const Registro = () => {
+    
+    const [usuario, setUsuario] = useState('');
+    const [primerApellido, setprimerApellido] = useState('');
+    const [segundoApellido, setsegundoApellido] = useState('');
+    const [correo, setcorreo] = useState('');
+    const [contrasena, setContrasena] = useState('');
+
+    async function submit(e) {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:3001/register", {
+                usuario,
+                contrasena,
+                correo,
+                primerApellido,
+                segundoApellido
+            });
+
+            if (response.data.validado) {
+                // Redirige al usuario a la página de la aplicación.
+                window.location.href = '/App';
+            } else {
+                console.log('Credenciales incorrectas');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return(
         <div className='container'>
             <div className='left'></div>
@@ -10,31 +40,31 @@ const Registro = () => {
                         <form>
                             <div className='input-container'>
                             <label htmlFor="username">Nombre:</label>
-                            <input type="text" id="username" name="username" required />
+                            <input type="text" onChange={(e)=> setUsuario(e.target.value)} id="username" name="username" required />
                             </div>
 
                             <div className='input-container'>
                             <label htmlFor="last name">Primer Apellido:</label>
-                            <input type="text" id="last name" name="last name" required />
+                            <input type="text" onChange={(e)=> setprimerApellido(e.target.value)} id="last name" name="last name" required />
                             </div>
 
                             <div className='input-container'>
                             <label htmlFor="last name">Segundo Apellido:</label>
-                            <input type="text" id="password" name="last name" required />
+                            <input type="text" onChange={(e)=> setsegundoApellido(e.target.value)} id="second last name" name="last name" required />
                             </div>
 
                             <div className='input-container'>
                             <label htmlFor="correo">Correo:</label>
-                            <input type="text" id="correo" name="correo" required />
+                            <input type="email" onChange={(e)=> setcorreo(e.target.value)} id="correo" name="correo" required />
                             </div>
 
                             <div className='input-container'>
                             <label htmlFor="password">Contraseña:</label>
-                            <input type="password" id="password" name="password" required />
+                            <input type="password" onChange={(e)=> setContrasena(e.target.value)} id="password" name="password" required />
                             </div>
 
                             <div className='input-container'>
-                            <button type="submit"><a href='/'>Regístrate</a></button>
+                            <button type="submit" onClick={submit}><a href='/'>Regístrate</a></button>
                             </div>
                         </form>
                     </div>

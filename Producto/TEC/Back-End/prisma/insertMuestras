@@ -1,0 +1,20 @@
+-- Insertar el tipo de muestra Foliar
+INSERT INTO lab.tipo_muestras ( nombre) VALUES ('Foliar');
+
+-- Insertar el tipo de muestra Suelo
+INSERT INTO lab.tipo_muestras ( nombre) VALUES ('Suelo');
+
+-- Insertar el tipo de muestra Materia Seca
+INSERT INTO lab.tipo_muestras ( nombre) VALUES ('Materia Seca');
+
+-- Insertar el tipo de muestra Abono Orgánico Sólido
+INSERT INTO lab.tipo_muestras ( nombre) VALUES ('Abono Orgánico Sólido');
+
+-- Insertar el tipo de muestra Abono Orgánico Líquido
+INSERT INTO lab.tipo_muestras ( nombre) VALUES ('Abono Orgánico Líquido');
+
+-- Insertar el tipo de muestra Bromatológico
+INSERT INTO lab.tipo_muestras ( nombre) VALUES ('Bromatológico');
+
+-- Insertar el tipo de muestra Otros
+INSERT INTO lab.tipo_muestras ( nombre) VALUES ('Otros');
