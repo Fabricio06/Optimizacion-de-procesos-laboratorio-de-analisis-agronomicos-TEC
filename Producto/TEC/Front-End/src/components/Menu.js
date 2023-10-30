@@ -7,8 +7,8 @@ const Menu = () => {
             <a href="/App">Laboratorio de Análisis <strong>Agronómicos</strong></a>
             <ul>
                 <li><a href="/">Inicio</a></li>
-                <li><a href="#">Formularios</a></li>
-                <li><a href="#">Accede al perfil</a></li>
+                <li><a href="/formulariosMuestras">Formularios</a></li>
+                <li><a href="/perfilUsuario">Accede al perfil</a></li>
             </ul>
         </div>
   );

@@ -7,7 +7,8 @@ import Registro from './components/Registro';
 import GestionClientes from './components/GestionClientes';
 import RegistroClientes from './components/RegistroClientes';
 import EliminarEditarClientes from './components/EliminarEditarClientes';
-import Bitacoras from './components/Bitacoras';
+import FormulariosMuestras from './components/FormulariosMuestras';
+import PerfilUsuario from './components/PerfilUsuario';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
     element: <GestionClientes/>,
   },
   {
-    path: "bitacoras",
-    element: <Bitacoras/>,
+    path: "formulariosMuestras",
+    element: <FormulariosMuestras/>,
   },
   {
     path: "registroClientes",
@@ -42,7 +43,12 @@ const router = createBrowserRouter([
   {
     path: "eliminarEditarClientes",
     element: <EliminarEditarClientes/>,
+  },
+  {
+    path: "perfilUsuario",
+    element: <PerfilUsuario/>,
   }
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

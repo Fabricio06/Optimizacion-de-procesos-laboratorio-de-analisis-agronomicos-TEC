@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  position:absolute;
   z-index: 2000; 
   top: 0;
 }
@@ -301,7 +301,7 @@ section#inicio .img-cover2{
 
 
 Body{
-  background-color: #fff;
+  background-color: #BBD6E6;
 }
 
 .option img {
@@ -487,4 +487,100 @@ Body{
   width: 80px;
   height: 40px;
   border-radius: 10px;
+}
+
+.Formularios{
+  background-color: #BBD6E6;
+  display: flex;
+  justify-content: center;
+  padding: 215px;
+  position: relative;
+  
+}
+
+.Formularios h2{
+  color: #2B4e62;
+}
+
+.Formularios select{
+  display: inline-block;
+	width: 100%;
+	cursor: pointer;
+  padding: 7px 10px;
+  height: 42px;
+  outline: 0; 
+  border: 0;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+	font-family: 
+	'Quicksand', sans-serif;
+	border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.Formularios button{
+  border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+  padding: 10px; /*espacio alrededor texto*/
+  background-color: #2e518b; /*color botón*/
+  color: #ffffff; /*color texto*/
+  text-decoration: none; /*decoración texto*/
+  text-transform: uppercase; /*capitalización texto*/
+  font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+  border-radius: 50px; /*bordes redondos*/
+}
+
+.profile {
+  
+  align-items: center;
+  padding-bottom: 270px;
+  background-color: #f5f5f5; /* Color de fondo blanco */
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.profile-container{
+  background-color: #BBD6E6;/* Color de fondo gris claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.profile .profile-picture {
+  flex: 1;
+  max-width: 100px;
+}
+
+.profile .profile-picture img {
+  border-width: 50%;/* Hace que la imagen sea circular */
+  max-width: 150px; /* Ajusta el tamaño de la imagen aquí */
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  margin-top: 20px;
+  padding-left: 55px;
+}
+
+.profile .profile-details {
+  flex: 2;
+  padding: 20px;
+}
+
+.profile-details h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.profile-details h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.profile-details p {
+  font-size: 16px;
+  margin-bottom: 5px;
 }

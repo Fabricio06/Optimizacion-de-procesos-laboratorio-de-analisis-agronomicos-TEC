@@ -23,6 +23,8 @@ const EliminarEditarClientes = () =>{
                 </div>
         </div>
 
+        
+
     </div>
     );
 
