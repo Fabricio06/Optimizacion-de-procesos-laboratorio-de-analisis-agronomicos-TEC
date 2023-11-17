@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Menu from './Menu';
 import DatosClientes from './DatosClientes';
+import Footer from './Footer';
 
 const RegistroClientes = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ const RegistroClientes = () => {
       </header>
       <div className='contenedor'>
         <div className='encabezado'>
-          <h2>Registro Clientes</h2>
+          <h2>Registro de Clientes</h2>
         </div>
         <div className='datos'>
         <form>
@@ -115,9 +116,11 @@ const RegistroClientes = () => {
             onChange={handleInputChange}/>
                     </li>
                 </ul>
+                <button onClick={enviarDatos}>Enviar</button>
             </form>
-          <button onClick={enviarDatos}>Enviar</button>
-
+        </div>
+        <div className='footer'>
+                <Footer/>
         </div>
       </div>
     </div>

@@ -89,7 +89,6 @@
   background-color: #2B4e62;
   color: #fff;
   display: flex;
-  height: 100%;
   width: 100%;
   flex-direction: column;
   justify-content: center;
@@ -415,7 +414,6 @@ Body{
 
 
 .menu{
-  height: 80px;
   width: 100%;
   background-color: #2B4e62;
   display: flex;
@@ -425,30 +423,6 @@ Body{
   z-index: 1; 
   top: 0;
 
-}
-
-.registroclientes{
-  min-height: 100vh;
-  background-color: #2B4e62;
-}
-
-.registroclientes .contenedor{
-  padding: 5px 20px 20px 20px;
-}
-
-.registroclientes .encabezado h2{
-  background-color: #4C83A3;
-  height: 50px;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  color: white;
-}
-
-.registroclientes .datos{
-  background-color: #BBD6E6;
-  padding: 30px;
-  height: 100%;
 }
 
 
@@ -583,4 +557,85 @@ Body{
 .profile-details p {
   font-size: 16px;
   margin-bottom: 5px;
+}
+
+.datos{
+  padding: 0%;
+  margin: 0;
+}
+
+.registroclientes .datos form{
+  width: 70%;
+  margin-left: 15%;
+}
+
+.registroclientes .datos form input{
+  display: inline-block;
+	width: 97%;
+	cursor: pointer;
+  padding: 3px 3px;
+  height: 20px;
+  outline: 0; 
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+	border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+  margin: 5px;  
+}
+
+.registroclientes .datos button{
+  margin-top: 100px;
+	background: #2B4e62;
+	color: #fff;
+	border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+  margin: 5px;
+  font-size: 20px;
+  padding: 5px;
+
+}
+
+
+.registroclientes{
+  min-height: 100vh;
+  background-color: #2B4e62;
+}
+
+.registroclientes .contenedor{
+  padding: 0px 0px 0px 0px;
+}
+
+.registroclientes .encabezado {
+  background-color: #BBD6E6;
+  height: 30px;
+  display: flex;
+  text-align: left;
+  justify-content: left;
+  color: #2B4e62;
+  padding: 10px;
+  
+}
+
+.registroclientes .encabezado h2{
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.registroclientes .datos{
+  background-color: #BBD6E6;
+  padding: 30px;
+  height: 100%;
+}
+
+.registroclientes .datos li{
+  text-decoration: none;
+  color: #2B4e62;
+  margin: 5px;
+  list-style-type: none;
 }
