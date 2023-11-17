@@ -1,0 +1,129 @@
+    * {
+        font-family: 'Arial', sans-serif;
+        background-color: white;
+    }
+  
+  /*Styles de la tabla en el encabezado*/
+
+  .headerTable{
+        padding: 30px;
+    }
+
+  .headerTable p{
+        padding-left: 5px;
+    }
+  .headerTable a{
+        text-decoration: none;
+        color: black;
+    }
+
+  .form-header-table { 
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse; 
+  }
+  
+  .light-header-font{
+        font-weight: 100;
+        font-size: 20px;    
+  }
+
+  .form-header-table tr td h1{
+        font-weight: 600;
+  }
+
+  .form-header-table th,
+  .form-header-table td {
+        border: 1px solid black;
+        padding: 10px;
+  }
+  
+  .form-header-table tr td:first-child {
+        border-right: 1px solid black;
+  }
+  
+  .form-header-table tr:first-child{
+        border-right: none;
+  }
+
+  .line-below-div {
+        border: none;
+        height: 3px;
+        background-color: gray; 
+        margin-top: 40px; 
+  }
+  
+  /*Styles de los datos del cliente*/
+  
+  .datosCliente{
+        padding: 30px;
+  }
+  
+  .form-row{
+    display: contents;
+    margin-bottom: 10px;
+  }
+
+  .form-row input {
+        border: none; 
+        border-bottom: 1px solid black; 
+        outline: none;
+        width: 200px; 
+    }
+
+    .form-row input:focus  {
+        border-bottom: 2px solid green;
+    }
+
+      
+  .form-row label {
+    margin-right: 10px;
+  }
+  
+  .form-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .form-table th, .form-table td {
+    border: 1px solid black;
+    padding: 8px;
+  }
+  
+  .form-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .form-footer {
+    /* Footer styles */
+  }
+  
+  input[type="submit"] {
+    margin-top: 20px;
+  }
+  
+  .footer-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .footer-field {
+    margin-bottom: 10px;
+  }
+  
+  .footer-field label {
+    margin-right: 10px;
+  }
+  
+  .submit-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

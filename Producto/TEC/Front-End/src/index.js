@@ -9,6 +9,7 @@ import RegistroClientes from './components/RegistroClientes';
 import EliminarEditarClientes from './components/EliminarEditarClientes';
 import FormulariosMuestras from './components/FormulariosMuestras';
 import PerfilUsuario from './components/PerfilUsuario';
+import FormularioIngresoMuestras from './components/FormularioIngresoMuestras/FormIngresoMuestrasPrincipal';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "perfilUsuario",
     element: <PerfilUsuario/>,
+  },
+  {
+    path: "FormularioIngresoMuestras",
+    element: <FormularioIngresoMuestras/>,
   }
 
 ]);
