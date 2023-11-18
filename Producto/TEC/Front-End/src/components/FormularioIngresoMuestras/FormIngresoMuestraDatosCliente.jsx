@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const DatosCliente = () => {
+const FormIngresoMuestraDatosCliente = () => {
     const [formData, setFormData] = useState({
         cliente: '',
         fecha: '',
@@ -34,7 +34,7 @@ const DatosCliente = () => {
     };
 
     return (  
-        <div className='datosCliente'>
+        <div className='FormIngresoMuestraDatosCliente'>
             <form onSubmit={handleSubmit}>
                 {/* Cliente */}
                 <div className="form-row">
@@ -211,4 +211,4 @@ const DatosCliente = () => {
     );
 };
 
-export default DatosCliente;
+export default FormIngresoMuestraDatosCliente;

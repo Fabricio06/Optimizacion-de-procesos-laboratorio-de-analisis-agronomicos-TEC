@@ -3,7 +3,7 @@ import './FormIngresoMuestras.css'; // Assume this is the CSS file that styles y
 import HeaderTable from './FormIngresoMuestraTablaH';
 import DatosCliente from './FormIngresoMuestraDatosCliente';
 
-const SampleForm = () => {
+const FormIngresoMuestrasPrincipal = () => {
   const [formData, setFormData] = useState({
     labCode: '',
     fieldId: '',
@@ -35,7 +35,7 @@ const SampleForm = () => {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-ingreso-muestras-principal">
        <HeaderTable />
        <DatosCliente/>
 
@@ -114,4 +114,4 @@ const SampleForm = () => {
   );
 };
 
-export default SampleForm;
+export default FormIngresoMuestrasPrincipal;
