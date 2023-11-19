@@ -40,7 +40,7 @@ const GestionClientes = () =>{
                 <div className='option2'>
                     <h3>Historial de clientes</h3>
                     <p>Verifique el historial de clientes</p>
-                    <p>Ingrese <strong> aquí</strong></p>
+                    <p>Ingrese <strong><a href='/historialClientes'>aquí</a></strong></p>
                     <img src={Icono3}/>
                 </div>
             </div>
