@@ -19,32 +19,78 @@ const HistorialClientes = () =>{
                 <div className='gridInformacion'>
                     <table>
                         <thead>
-                            <td colSpan={2}><b>Nombre</b></td>
+                            <tr>
+                            <td><b>Nombre</b></td>
                             <td><b>Cédula</b></td>
                             <td><b>Empresa</b></td>
                             <td><b>Teléfono</b></td>
                             <td colSpan={2}><b>Email Informe</b></td>
-                            <td><b>Email Factura</b></td>
+                            <td colSpan={2}><b>Email Factura</b></td>
                             <td><b>Provincia</b></td>
                             <td><b>Canton</b></td>
                             <td><b>Distrito</b></td>
                             <td><b>Otras Señas</b></td>
                             <td><b>Cultivo</b></td>
                             <td><b>Boleta</b></td>
+                            </tr>
                         </thead>
                         <tbody>
-                            <td colSpan={2}><b>Raschell</b></td>
-                            <td><b>208390433</b></td>
-                            <td><b>TEC</b></td>
-                            <td><b>64345608</b></td>
-                            <td><b>raschelljq132@gmail.com</b></td>
-                            <td><b>tec@gmail.com</b></td>
-                            <td><b>Alajuela</b></td>
-                            <td><b>Los Chiles</b></td>
-                            <td><b>Los Chiles</b></td>
-                            <td><b>Centro</b></td>
-                            <td><b>Cultivo</b></td>
-                            <td><b>Boleta</b></td>
+                            <tr>
+                            <td>Raschell</td>
+                            <td>208390433</td>
+                            <td>TEC</td>
+                            <td>64345608</td>
+                            <td colSpan={2}>raschelljq132@gmail.com</td>
+                            <td colSpan={2}>tec@gmail.com</td>
+                            <td>Alajuela</td>
+                            <td>Los Chiles</td>
+                            <td>Los Chiles</td>
+                            <td>Centro</td>
+                            <td>Cultivo</td>
+                            <td>Boleta</td>
+                            </tr>
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colSpan={2}></td>
+                            <td colSpan={2}></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colSpan={2}></td>
+                            <td colSpan={2}></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colSpan={2}></td>
+                            <td colSpan={2}></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
                         </tbody>
                     </table>
 
