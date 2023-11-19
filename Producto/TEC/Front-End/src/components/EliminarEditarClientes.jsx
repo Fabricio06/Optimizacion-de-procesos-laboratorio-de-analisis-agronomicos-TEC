@@ -5,12 +5,13 @@ import DatosClientes from './DatosClientes';
 const EliminarEditarClientes = () =>{
     return(
     <div className='eliminareditarclientes'>
-    
         <header>
             <Menu />
         </header>
-    
-        <div className='contenedor'>    
+        <div className='contenedor'>
+                <div className='titulo'>
+                    <h2>Eliminación o edición de clientes</h2>
+                </div>
                 <div className='encabezado'>
                     <label htmlFor="cedulaBuscar">Cedula:</label>
                     <input type="text" />
@@ -22,8 +23,6 @@ const EliminarEditarClientes = () =>{
                     <button className='boton'>Aplicar cambios</button>
                 </div>
         </div>
-
-        
 
     </div>
     );

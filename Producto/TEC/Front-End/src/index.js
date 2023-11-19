@@ -9,6 +9,7 @@ import RegistroClientes from './components/RegistroClientes';
 import EliminarEditarClientes from './components/EliminarEditarClientes';
 import FormulariosMuestras from './components/FormulariosMuestras';
 import PerfilUsuario from './components/PerfilUsuario';
+import HistorialClientes from './components/HistorialClientes';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "perfilUsuario",
     element: <PerfilUsuario/>,
+  },
+  {
+    path: "historialClientes",
+    element: <HistorialClientes/>
   }
 
 ]);
