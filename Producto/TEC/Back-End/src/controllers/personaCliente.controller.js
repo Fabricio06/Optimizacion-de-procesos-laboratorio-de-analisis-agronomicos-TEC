@@ -71,7 +71,7 @@ export const getFormulariosPorCedula = async (req, res) => { //Consulta para que
 
         if (nombre) {
             consulta += ` AND nombre ILIKE $${params.length + 1}`;
-            params.push(`%${nombre}%`);
+            params.push(`${nombre}%`);
         }
         if (cedula) {
             consulta += ` AND cedula::text LIKE $${params.length + 1}`;
