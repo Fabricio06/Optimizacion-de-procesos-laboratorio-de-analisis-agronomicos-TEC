@@ -1,212 +1,179 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const FormIngresoMuestraDatosCliente = () => {
-    const [formData, setFormData] = useState({
-        cliente: '',
-        fecha: '',
-        empresa: '',
-        boleta: '',
-        telefono: '',
-        emailInforme: '',
-        cedula: '',
-        emailFactura: '',
-        provincia: '',
-        canton: '',
-        distrito: '',
-        otrasSenas: '',
-        cultivo: '',
-        muestraEntregada: ''
-    });
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-          ...formData,
-          [name]: value,
-        });
-    };
-    
-    // Handle form submission
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Here you would typically send the form data to a server
-        console.log(formData);
-    };
+const FormIngresoMuestraDatosCliente = ({register}) => {
 
     return (  
         <div className='FormIngresoMuestraDatosCliente'>
-            <form onSubmit={handleSubmit}>
+            <form>
+                <div className='linea-1-clientes'>
                 {/* Cliente */}
-                <div className="form-row">
-                    <label htmlFor="cliente">CLIENTE:</label>
-                    <input
-                        type="text"
-                        id="cliente"
-                        name="cliente"
-                        value={formData.cliente}
-                        onChange={handleInputChange}
-                    />
+                    <div className="form-row">
+                        <label htmlFor="cliente">CLIENTE:</label>
+                        <input
+                            type="text"
+                            id="cliente"
+                            name="cliente"
+                            {...register('nombre')}
+                        />
+                    </div>
+
+                    {/* Fecha */}
+                    <div className="form-row">
+                        <label htmlFor="fecha">FECHA:</label>
+                        <input
+                            type="date"
+                            id="fecha"
+                            name="fecha"
+                            {...register('fecha')}
+                        />
+                    </div>
                 </div>
 
-                {/* Fecha */}
-                <div className="form-row">
-                    <label htmlFor="fecha">FECHA:</label>
-                    <input
-                        type="date"
-                        id="fecha"
-                        name="fecha"
-                        value={formData.fecha}
-                        onChange={handleInputChange}
-                    />
+                <div className='linea-1-clientes'>
+                    {/* Empresa */}
+                    <div className="form-row">
+                        <label htmlFor="empresa">EMPRESA:</label>
+                        <input
+                            type="text"
+                            id="empresa"
+                            name="empresa"
+                            {...register('empresa')}
+                        />
+                    </div>
+
+                    {/* Boleta */}
+                    <div className="form-row">
+                        <label htmlFor="boleta">BOLETA:</label>
+                        <input
+                            type="text"
+                            id="boleta"
+                            name="boleta"
+                            {...register('boleta')}
+                        />
+                    </div>
+                </div>
+                
+                <div className='linea-2-clientes'>
+                    {/* Teléfono */}
+                    <div className="form-row">
+                        <label htmlFor="telefono">TELÉFONO:</label>
+                        <input
+                            type="number"
+                            id="telefono"
+                            name="telefono"
+                            {...register('telefono')}
+                        />
+                    </div>
+
+                    {/* Email Informe */}
+                    <div className="form-row">
+                        <label htmlFor="emailInforme">EMAIL PARA INFORME:</label>
+                        <input
+                            type="email"
+                            id="emailInforme"
+                            name="emailInforme"
+                            {...register('emailInforme')}
+                        />
+                    </div>
+
                 </div>
 
-                {/* Empresa */}
-                <div className="form-row">
-                    <label htmlFor="empresa">EMPRESA:</label>
-                    <input
-                        type="text"
-                        id="empresa"
-                        name="empresa"
-                        value={formData.empresa}
-                        onChange={handleInputChange}
-                    />
-                </div>
+                <div className='linea-2-clientes'>
+                    {/* Cédula */}
+                    <div className="form-row">
+                        <label htmlFor="cedula">CÉDULA:</label>
+                        <input
+                            type="number"
+                            id="cedula"
+                            name="cedula"
+                            {...register('cedula')}
+                        />
+                    </div>
 
-                {/* Boleta */}
-                <div className="form-row">
-                    <label htmlFor="boleta">BOLETA:</label>
-                    <input
-                        type="text"
-                        id="boleta"
-                        name="boleta"
-                        value={formData.boleta}
-                        onChange={handleInputChange}
-                    />
+                    {/* Email Factura */}
+                    <div className="form-row">
+                        <label htmlFor="emailFactura">EMAIL PARA FACTURA:</label>
+                        <input
+                            type="email"
+                            id="emailFactura"
+                            name="emailFactura"
+                            {...register('emailFactura')}
+                        />
+                    </div>
                 </div>
+                
+                <div className='linea-3-clientes'>
+                    {/* Provincia */}
+                    <div className="form-row">
+                        <label htmlFor="provincia">PROVINCIA:</label>
+                        <input
+                            type="text"
+                            id="provincia"
+                            name="provincia"
+                            {...register('provincia')}
+                        />
+                    </div>
 
-                {/* Teléfono */}
-                <div className="form-row">
-                    <label htmlFor="telefono">TELÉFONO:</label>
-                    <input
-                        type="text"
-                        id="telefono"
-                        name="telefono"
-                        value={formData.telefono}
-                        onChange={handleInputChange}
-                    />
+                    {/* Cantón */}
+                    <div className="form-row">
+                        <label htmlFor="canton">CANTÓN:</label>
+                        <input
+                            type="text"
+                            id="canton"
+                            name="canton"
+                            {...register('canton')}
+                        />
+                    </div>
+
+                    {/* Distrito */}
+                    <div className="form-row">
+                        <label htmlFor="distrito">DISTRITO:</label>
+                        <input
+                            type="text"
+                            id="distrito"
+                            name="distrito"
+                            {...register('distrito')}
+                        />
+                    </div>
                 </div>
-
-                {/* Email Informe */}
-                <div className="form-row">
-                    <label htmlFor="emailInforme">EMAIL PARA INFORME:</label>
-                    <input
-                        type="email"
-                        id="emailInforme"
-                        name="emailInforme"
-                        value={formData.emailInforme}
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                {/* Cédula */}
-                <div className="form-row">
-                    <label htmlFor="cedula">CÉDULA:</label>
-                    <input
-                        type="text"
-                        id="cedula"
-                        name="cedula"
-                        value={formData.cedula}
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                {/* Email Factura */}
-                <div className="form-row">
-                    <label htmlFor="emailFactura">EMAIL PARA FACTURA:</label>
-                    <input
-                        type="email"
-                        id="emailFactura"
-                        name="emailFactura"
-                        value={formData.emailFactura}
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                {/* Provincia */}
-                <div className="form-row">
-                    <label htmlFor="provincia">PROVINCIA:</label>
-                    <input
-                        type="text"
-                        id="provincia"
-                        name="provincia"
-                        value={formData.provincia}
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                {/* Cantón */}
-                <div className="form-row">
-                    <label htmlFor="canton">CANTÓN:</label>
-                    <input
-                        type="text"
-                        id="canton"
-                        name="canton"
-                        value={formData.canton}
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                {/* Distrito */}
-                <div className="form-row">
-                    <label htmlFor="distrito">DISTRITO:</label>
-                    <input
-                        type="text"
-                        id="distrito"
-                        name="distrito"
-                        value={formData.distrito}
-                        onChange={handleInputChange}
-                    />
-                </div>
-
                 {/* Otras Señas */}
-                <div className="form-row">
-                    <label htmlFor="otrasSenas">OTRAS SEÑAS:</label>
-                    <input
-                        type="text"
-                        id="otrasSenas"
-                        name="otrasSenas"
-                        value={formData.otrasSenas}
-                        onChange={handleInputChange}
-                    />
+                <div className='linea-4-clientes'>
+                    <div className="form-row">
+                        <label htmlFor="otrasSenas">OTRAS SEÑAS:</label>
+                        <input
+                            type="text"
+                            id="otrasSenas"
+                            name="otrasSenas"
+                            {...register('otrasSenas')}
+                        />
+                    </div>
                 </div>
 
-                {/* Cultivo */}
-                <div className="form-row">
-                    <label htmlFor="cultivo">CULTIVO:</label>
-                    <input
-                        type="text"
-                        id="cultivo"
-                        name="cultivo"
-                        value={formData.cultivo}
-                        onChange={handleInputChange}
-                    />
-                </div>
+                <div className='linea-2-clientes'>
+                    {/* Cultivo */}
+                    <div className="form-row">
+                        <label htmlFor="cultivo">CULTIVO:</label>
+                        <input
+                            type="text"
+                            id="cultivo"
+                            name="cultivo"
+                            {...register('cultivo')}
+                        />
+                    </div>
 
-                {/* Muestra Entregada */}
-                <div className="form-row">
-                    <label htmlFor="muestraEntregada">MUESTRA ENTREGADA:</label>
-                    <input
-                        type="text"
-                        id="muestraEntregada"
-                        name="muestraEntregada"
-                        value={formData.muestraEntregada}
-                        onChange={handleInputChange}
-                    />
+                    {/* Muestra Entregada */}
+                    <div className="form-row">
+                        <label htmlFor="muestraEntregada">MUESTRA ENTREGADA:</label>
+                        <input
+                            type="text"
+                            id="muestraEntregada"
+                            name="muestraEntregada"
+                            {...register('muestraEntregada')}
+                        />
+                    </div>
                 </div>
-
-                {/* Botón de envío */}
-                <button type="submit">Enviar</button>
             </form>
+            <hr className='line-below-div' />
         </div>
     );
 };

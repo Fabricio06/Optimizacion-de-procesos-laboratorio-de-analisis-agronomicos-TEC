@@ -1,117 +1,87 @@
-import React, { useState } from 'react';
-import './FormIngresoMuestras.css'; // Assume this is the CSS file that styles your components
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import './FormIngresoMuestras.css';
 import HeaderTable from './FormIngresoMuestraTablaH';
 import DatosCliente from './FormIngresoMuestraDatosCliente';
+import BodyTable from './FormIngresoMuestrasBody';
+import FooterTable from './FormIngresoMuestrasFooter';
 
-const FormIngresoMuestrasPrincipal = () => {
-  const [formData, setFormData] = useState({
-    labCode: '',
-    fieldId: '',
-    requiredAnalysis: '',
-    receivedBy: '',
-    analysisCost: '',
-    tax: '',
-    totalToPay: '',
-    invoiceRequest: '',
-    purchaseOrder: '',
-    invoiceToBank: '',
-    // ... any other fields you have
-  });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+import generatePDF, { Resolution, Margin, usePDF } from 'react-to-pdf';
+const options = {
+  filename: "advanced-example.pdf",
+  method: "save",
+  // default is Resolution.MEDIUM = 3, which should be enough, higher values
+  // increases the image quality but also the size of the PDF, so be careful
+  // using values higher than 10 when having multiple pages generated, it
+  // might cause the page to crash or hang.
+  resolution: Resolution.EXTREME,
+  page: {
+    // margin is in MM, default is Margin.NONE = 0
+    margin: Margin.SMALL,
+    // default is 'A4'
+    format: "letter",
+    // default is 'portrait'
+    orientation: "landscape"
+  },
+  canvas: {
+    // default is 'image/jpeg' for better size performance
+    mimeType: "image/jpeg",
+    qualityRatio: 1
+  },
+  // Customize any value passed to the jsPDF instance and html2canvas
+  // function. You probably will not need this and things can break,
+  // so use with caution.
+  overrides: {
+    // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+    pdf: {
+      compress: true
+    },
+    // see https://html2canvas.hertzen.com/configuration for more options
+    canvas: {
+      useCORS: true
+    }
+  }
+};
+ // you can use a function to return the target element besides using React refs
+ const getTargetElement = () => document.getElementById("pdf-content");
+
+ const downloadPdf = () => generatePDF(getTargetElement, options);
+
+
+const SampleForm = () => {    
+  const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const onSubmit = data => {
+      // Aquí manejas los datos del formulario
+      console.log(data);
   };
 
-
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Here you would typically send the form data to a server
-    console.log(formData);
+  const handleDataFromChild = (tableData) => {
+    setValue('tablaDatos', tableData);
   };
 
   return (
-    <div className="form-ingreso-muestras-principal">
+    <div className="form-container">
+       <div id='pdf-content'>
+       
        <HeaderTable />
-       <DatosCliente/>
-
-      <form action="">
-
-        <div className="form-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Código Laboratorio</th>
-                <th>Identificación de Campo</th>
-                <th>Análisis Requerido</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Dynamically generate table rows based on state */}
-            </tbody>
-          </table>
-        </div>
-
-         {/* Footer Section */}
-         <div className="footer-section">
-          <div className="footer-field">
-            <label htmlFor="receivedBy">Recibido por:</label>
-            <input
-              type="text"
-              id="receivedBy"
-              name="receivedBy"
-              value={formData.receivedBy}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="footer-field">
-            <label htmlFor="analysisCost">Costo de Análisis €</label>
-            <input
-              type="text"
-              id="analysisCost"
-              name="analysisCost"
-              value={formData.analysisCost}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="footer-field">
-            <label htmlFor="tax">2% IVA €</label>
-            <input
-              type="text"
-              id="tax"
-              name="tax"
-              value={formData.tax}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="footer-field">
-            <label htmlFor="totalToPay">Total a Pagar €</label>
-            <input
-              type="text"
-              id="totalToPay"
-              name="totalToPay"
-              value={formData.totalToPay}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          {/* ... Add other footer fields in similar fashion */}
-        </div>
-
-        {/* Submit Button */}
-        <div className="submit-container">
-          <input type="submit" value="Enviar" className="submit-button" />
-        </div>
-      </form>
+       <form onSubmit={handleSubmit(onSubmit)}>
+          <DatosCliente register={register} />
+          <BodyTable onDataSubmit={handleDataFromChild}/>
+          <FooterTable register={register}/>
+      {/* Submit Button */}
+      <button type="submit">Enviar</button>
+       </form>
+       
+       
+       
+       </div>
+       <button onClick={downloadPdf}>Download PDF</button>
     </div>
+    
   );
+  
 };
-
-export default FormIngresoMuestrasPrincipal;
+export default SampleForm;
