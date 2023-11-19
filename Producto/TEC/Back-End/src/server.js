@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import personaClienteRoutes from './routes/personaCliente.routes.js'
 import personaTecnicoRoutes from './routes/personaTecnico.routes.js'
+import muestraRoutes from './routes/muestra.routes.js'
+import formularioRoutes from './routes/formulario.routes.js'
 import bcrypt from 'bcrypt'
 import {pool} from './dbConfig.js'
 const app = express();
@@ -16,6 +18,12 @@ app.use('/api/user', personaTecnicoRoutes);
 
 //Usar enrutador de Cliente
 app.use('/api/cliente', personaClienteRoutes);
+
+//Usar enrutador de Muestra
+app.use('/api/muestra', muestraRoutes);
+
+//Usar enrutador de Fromulario
+app.use('/api/formulario', formularioRoutes);
 
 //#region Codigo Propio del Server.js/Api
 app.get('/', (req, res) => {

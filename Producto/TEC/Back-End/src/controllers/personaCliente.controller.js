@@ -29,8 +29,8 @@ export const getFormulariosPorCedula = async (req, res) => { //Consulta para que
         SELECT
           fc.id AS formulario_id,
           fc."clienteId" AS cliente_id,
+          pc.nombre AS nombre,
           pc.empresa AS nombre_empresa,
-          pc.
           pc.telefono AS telefono_empresa,
           pc.email_informe AS email_informe,
           pc.email_factura AS email_factura,
@@ -39,15 +39,9 @@ export const getFormulariosPorCedula = async (req, res) => { //Consulta para que
           pc.distrito AS distrito,
           pc.otras_senas AS otras_senas,
           pc.cultivo AS cultivo,
-          pc.boleta AS boleta,
-          m.id AS muestra_id,
-          m.codigo_laboratorio AS codigo_laboratorio,
-          m.identificacion_campo AS identificacion_campo,
-          tm.nombre AS tipo_muestra
+          pc.boleta AS boleta
         FROM lab.formulario fc
         JOIN lab.persona_cliente pc ON fc."clienteId" = pc.id
-        JOIN lab.muestras m ON fc.id = m."formularioId"
-        JOIN lab.tipo_muestras tm ON m."tipo_muestraId" = tm.id
         WHERE pc.cedula = $1;
       `;
       const { rows } = await pool.query(consultaSQL, [cedula]);
@@ -102,7 +96,7 @@ export const updatePersonaCliente = async(req, res) => {
     try {
         const { id } = req.params;
         const { correoInstitucional, nombre, apellido1, apellido2, autenticarId } = req.body;
-        await pool.query('UPDATE lab.persona_cliente SET correoInstitucional = $1, nombre = $2, apellido1 = $3, apellido2 = $4, autenticarId = $5 WHERE id = $6', [correoInstitucional, nombre, apellido1, apellido2, autenticarId, id]);
+        await pool.query('UPDATE lab.persona_cliente SET correoInstitucional = $1, nombre = $2, apellido1 = $3, apellido2 = $4, "autenticarId" = $5 WHERE id = $6', [correoInstitucional, nombre, apellido1, apellido2, autenticarId, id]);
         res.json({ message: 'Tecnico actualizado exitosamente' });
     } catch (err) {
         console.error(err);

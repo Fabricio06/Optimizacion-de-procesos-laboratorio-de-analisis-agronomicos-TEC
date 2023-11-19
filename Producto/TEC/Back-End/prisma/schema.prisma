@@ -45,7 +45,7 @@ model persona_cliente{
 
 model formulario{
   id            Int @id @default(autoincrement())
-  persona_cliente persona_cliente @relation(fields: [clienteId], references: [id])
+  persona_cliente persona_cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
   clienteId     Int
   muestras muestras[]
 }
@@ -54,7 +54,7 @@ model muestras{
   id     Int @id @default(autoincrement())
   codigo_laboratorio String
   identificacion_campo String
-  formulario formulario @relation(fields: [formularioId], references: [id])
+  formulario formulario @relation(fields: [formularioId], references: [id], onDelete: Cascade)
   formularioId    Int
   tipo_muestras tipo_muestras @relation(fields: [tipo_muestraId], references: [id])
   tipo_muestraId Int
