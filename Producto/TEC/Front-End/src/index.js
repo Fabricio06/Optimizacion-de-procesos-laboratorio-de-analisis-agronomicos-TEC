@@ -9,6 +9,7 @@ import RegistroClientes from './components/RegistroClientes';
 import EliminarEditarClientes from './components/EliminarEditarClientes';
 import FormulariosMuestras from './components/FormulariosMuestras';
 import PerfilUsuario from './components/PerfilUsuario';
+import FormularioIngresoMuestras from './components/FormularioIngresoMuestras/FormIngresoMuestrasPrincipal';
 import HistorialClientes from './components/HistorialClientes';
 import {
   createBrowserRouter,
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     element: <Login/>,
   },
   {
-    path: "App",
+    path: "App", //Recordar aplicar Require Login aquí
     element: <App/>,
   },
   {
@@ -50,9 +51,12 @@ const router = createBrowserRouter([
     element: <PerfilUsuario/>,
   },
   {
+    path: "FormularioIngresoMuestras",
+    element: <FormularioIngresoMuestras/>,
+  },{
     path: "historialClientes",
     element: <HistorialClientes/>
-  }
+  },
 
 ]);
 

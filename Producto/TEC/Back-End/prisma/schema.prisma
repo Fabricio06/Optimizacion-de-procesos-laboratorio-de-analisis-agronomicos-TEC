@@ -29,6 +29,7 @@ model persona_tecnico {
 model persona_cliente{
   id              Int @id @default(autoincrement())
   cedula          Int @unique
+  nombre          String
   empresa         String
   telefono        String
   email_informe   String
@@ -39,32 +40,24 @@ model persona_cliente{
   otras_senas     String
   cultivo         String
   boleta          String
-  cliente_formulario cliente_formulario []
-}
-
-model cliente_formulario{
-  id Int @id @default(autoincrement())
-  persona_cliente persona_cliente @relation(fields: [clienteId], references: [id])
-  clienteId Int 
-  formulario formulario @relation(fields: [formularioId], references: [id])
-  formularioId Int
+  formulario formulario []
 }
 
 model formulario{
   id            Int @id @default(autoincrement())
-  muestras muestras @relation(fields: [muestrasId], references: [id])
-  muestrasId    Int 
-  cliente_formulario cliente_formulario []
+  persona_cliente persona_cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  clienteId     Int
+  muestras muestras[]
 }
-
 
 model muestras{
   id     Int @id @default(autoincrement())
   codigo_laboratorio String
   identificacion_campo String
+  formulario formulario @relation(fields: [formularioId], references: [id], onDelete: Cascade)
+  formularioId    Int
   tipo_muestras tipo_muestras @relation(fields: [tipo_muestraId], references: [id])
   tipo_muestraId Int
-  formulario formulario[]
 }
 
 model tipo_muestras{

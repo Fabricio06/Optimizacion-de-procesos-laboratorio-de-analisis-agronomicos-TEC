@@ -1,4 +1,6 @@
 import {pool} from '../dbConfig.js'
+import bcrypt from 'bcrypt'
+
 
 export const getPersonaTecnico = async(req, res) => {
     try {
@@ -21,6 +23,8 @@ export const getPersonaTecnicoById = async(req, res) => {
     }
 }
 
+//Esto Es lo mío para el login y el register, implementar después.-------------------------------------------------------------------
+/*
 export const createPersonaTecnico = async(req, res) => {
     try {
         let { correoInstitucional, nombre, apellido1, apellido2, autenticarId } = req.body;
@@ -32,6 +36,25 @@ export const createPersonaTecnico = async(req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+*/
+
+export const createPersonaTecnico = async (req, res) => {
+    const { correo, nombre, primerApellido, segundoApellido, contrasena } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(contrasena, 10);
+        const insertAuthQuery = 'INSERT INTO lab.autenticar(contrasena) VALUES ($1) RETURNING id';
+        const authResult = await pool.query(insertAuthQuery, [hashedPassword]);
+
+        const autenticarId = authResult.rows[0].id;
+        const insertPersonaQuery = 'INSERT INTO lab.persona_tecnico ("correoInstitucional", nombre, apellido1, apellido2, "autenticarId") VALUES($1, $2, $3, $4, $5)';
+        await pool.query(insertPersonaQuery, [correo, nombre, primerApellido, segundoApellido, autenticarId]);
+        res.json({ registrado: true });
+    } catch (error) {
+        console.error('Error en registro:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+}
+//Esto Es lo mío para el login y el register, implementar después.------------------------------------------------------------------
 
 export const updatePersonaTecnico = async(req, res) => {
     try {
