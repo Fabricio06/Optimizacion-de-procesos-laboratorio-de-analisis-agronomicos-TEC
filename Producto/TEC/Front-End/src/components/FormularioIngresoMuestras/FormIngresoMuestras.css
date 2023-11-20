@@ -241,6 +241,11 @@
   border-bottom: 2px solid green;
 }
 
+/*Style ClientesSelectorPage*/
+
+.ClientesSelectorPage{
+  background-color: white;
+}
 
 
 /*Style Responsive*/

@@ -94,9 +94,9 @@ export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que 
 
 export const createPersonaCliente = async(req, res) => {
     try {
-        const { cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
-        console.log({ cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta })
-        const result = await pool.query('INSERT INTO lab.persona_cliente (cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta])
+        const  {cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
+        console.log({cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta })
+        const result = await pool.query('INSERT INTO lab.persona_cliente (cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *', [cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta])
         res.json(result.rows[0]);
     } catch (error) {
         console.error('Error inserting tecnico:', error);

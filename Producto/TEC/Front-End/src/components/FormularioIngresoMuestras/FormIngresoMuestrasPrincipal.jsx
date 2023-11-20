@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, setValue } from 'react-hook-form';
 import './FormIngresoMuestras.css';
 import HeaderTable from './FormIngresoMuestraTablaH';
 import DatosCliente from './FormIngresoMuestraDatosCliente';
@@ -168,7 +168,7 @@ const SampleForm = () => {
        
        <HeaderTable />
        <form onSubmit={handleSubmit(onSubmit)}>
-          <DatosCliente register={register} />
+          <DatosCliente register={register} setValue={setValue} />
           <BodyTable onDataSubmit={handleDataFromChild}/>
           <FooterTable register={register}/>
       {/* Submit Button */}
