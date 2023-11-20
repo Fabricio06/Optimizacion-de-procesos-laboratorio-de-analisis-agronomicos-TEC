@@ -45,7 +45,7 @@ app.post('/login', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { usuario, contrasena } = req.body;
     try {
-        const result = await pool.query(`SELECT * FROM lab.persona_tecnico AS pt JOIN lab.autenticar AS au ON pt."autenticarId" = au.id WHERE pt.nombre = $1`, [usuario]);
+        const result = await pool.query(`SELECT * FROM lab.autenticar AS au JOIN lab.persona_tecnico AS pt ON au."tecnicoId" = pt.id WHERE pt.nombre = $1`, [usuario]);
         if (result.rows.length > 0) {
             const user = result.rows[0];
             const validPassword = await bcrypt.compare(contrasena, user.contrasena);

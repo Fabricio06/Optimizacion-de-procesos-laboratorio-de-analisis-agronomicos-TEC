@@ -41,19 +41,23 @@ export const createPersonaTecnico = async(req, res) => {
 export const createPersonaTecnico = async (req, res) => {
     const { correo, nombre, primerApellido, segundoApellido, contrasena } = req.body;
     try {
-        const hashedPassword = await bcrypt.hash(contrasena, 10);
-        const insertAuthQuery = 'INSERT INTO lab.autenticar(contrasena) VALUES ($1) RETURNING id';
-        const authResult = await pool.query(insertAuthQuery, [hashedPassword]);
+        // Insertar persona_tecnico
+        const insertPersonaQuery = 'INSERT INTO lab.persona_tecnico ("correoInstitucional", nombre, apellido1, apellido2) VALUES ($1, $2, $3, $4) RETURNING id';
+        const personaResult = await pool.query(insertPersonaQuery, [correo, nombre, primerApellido, segundoApellido]);
+        const personaId = personaResult.rows[0].id;
 
-        const autenticarId = authResult.rows[0].id;
-        const insertPersonaQuery = 'INSERT INTO lab.persona_tecnico ("correoInstitucional", nombre, apellido1, apellido2, "autenticarId") VALUES($1, $2, $3, $4, $5)';
-        await pool.query(insertPersonaQuery, [correo, nombre, primerApellido, segundoApellido, autenticarId]);
+        // Insertar autenticar con el ID obtenido de persona_tecnico
+        const hashedPassword = await bcrypt.hash(contrasena, 10);
+        const insertAuthQuery = 'INSERT INTO lab.autenticar(contrasena, "tecnicoId") VALUES ($1, $2)';
+        await pool.query(insertAuthQuery, [hashedPassword, personaId]);
+
         res.json({ registrado: true });
     } catch (error) {
         console.error('Error en registro:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
-}
+};
+
 //Esto Es lo mío para el login y el register, implementar después.------------------------------------------------------------------
 
 export const updatePersonaTecnico = async(req, res) => {

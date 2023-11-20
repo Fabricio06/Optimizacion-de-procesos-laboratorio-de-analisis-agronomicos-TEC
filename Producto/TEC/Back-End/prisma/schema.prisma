@@ -13,7 +13,8 @@ datasource db {
 model autenticar {
   id          Int     @id @default(autoincrement())
   contrasena  String
-  person_tecnico persona_tecnico []
+  persona_tecnico          persona_tecnico @relation(fields: [tecnicoId], references: [id], onDelete: Cascade)
+  tecnicoId        Int
 }
 
 model persona_tecnico {
@@ -22,8 +23,7 @@ model persona_tecnico {
   nombre              String
   apellido1           String
   apellido2           String
-  autenticar          autenticar @relation(fields: [autenticarId], references: [id])
-  autenticarId        Int
+  autenticar autenticar []
 }
 
 model persona_cliente{
