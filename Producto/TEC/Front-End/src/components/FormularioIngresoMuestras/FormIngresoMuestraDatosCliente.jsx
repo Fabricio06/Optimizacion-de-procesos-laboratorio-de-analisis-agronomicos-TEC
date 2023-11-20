@@ -1,6 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Cambio aquí  
+import { useForm } from 'react-hook-form';
 
-const FormIngresoMuestraDatosCliente = ({register}) => {
+const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const clienteSeleccionado = localStorage.getItem('clienteSeleccionado');
+        if (clienteSeleccionado) {
+            const datosCliente = JSON.parse(clienteSeleccionado);
+            console.log(datosCliente)
+            // Aquí asignas cada campo del formulario con los datos del cliente
+            setValue('nombre', datosCliente.nombre);
+            setValue('empresa', datosCliente.empresa);
+            setValue('telefono', datosCliente.telefono);
+            setValue('emailInforme', datosCliente.emailInforme);
+            // Continúa asignando otros campos necesarios...
+            localStorage.removeItem('clienteSeleccionado');
+        }
+    }, [setValue]);
+
+    const handleVincularCliente = () => {
+        navigate('/seleccionar-cliente');
+    };
+
 
     return (  
         <div className='FormIngresoMuestraDatosCliente'>
@@ -173,6 +197,9 @@ const FormIngresoMuestraDatosCliente = ({register}) => {
                     </div>
                 </div>
             </form>
+            <button type='button' onClick={handleVincularCliente}>Vincular cliente</button>
+
+
             <hr className='line-below-div' />
         </div>
     );

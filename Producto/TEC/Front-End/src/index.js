@@ -11,6 +11,7 @@ import FormulariosMuestras from './components/FormulariosMuestras';
 import PerfilUsuario from './components/PerfilUsuario';
 import FormularioIngresoMuestras from './components/FormularioIngresoMuestras/FormIngresoMuestrasPrincipal';
 import HistorialClientes from './components/HistorialClientes';
+import ClienteSelectorPage from './components/FormularioIngresoMuestras/ClienteDataGrid';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -56,7 +57,10 @@ const router = createBrowserRouter([
   },{
     path: "historialClientes",
     element: <HistorialClientes/>
-  },
+  },{ 
+    path: "/seleccionar-cliente",
+    element: <ClienteSelectorPage/>
+  }
 
 ]);
 

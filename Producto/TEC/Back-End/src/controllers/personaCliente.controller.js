@@ -22,14 +22,16 @@ export const getPersonaClienteById = async(req, res) => {
     }
 }
 
-export const getFormulariosPorCedula = async (req, res) => { //Consulta para que se muestren todas las muestras relacionadas a un formulario
+//Consulta para usarse: http://localhost:3001/api/cliente/obtenerFormularioPorFiltro/parametros?cedula=12&nombre=M
+export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que se muestren todas las muestras relacionadas a un formulario
     try {
-      const { cedula } = req.params;
-      const consultaSQL = `
+      const { nombre, cedula } = req.query;
+      let consultaSQL = `
         SELECT
           fc.id AS formulario_id,
           fc."clienteId" AS cliente_id,
           pc.nombre AS nombre,
+          pc.cedula AS cedula,
           pc.empresa AS nombre_empresa,
           pc.telefono AS telefono_empresa,
           pc.email_informe AS email_informe,
@@ -42,17 +44,27 @@ export const getFormulariosPorCedula = async (req, res) => { //Consulta para que
           pc.boleta AS boleta
         FROM lab.formulario fc
         JOIN lab.persona_cliente pc ON fc."clienteId" = pc.id
-        WHERE pc.cedula = $1;
+        WHERE 1=1
       `;
-      const { rows } = await pool.query(consultaSQL, [cedula]);
+      const params = [];
+
+      if (nombre) {
+            consultaSQL += ` AND nombre ILIKE $${params.length + 1}`;
+            params.push(`${nombre}%`);
+        }
+      if (cedula) {
+            consultaSQL += ` AND cedula::text LIKE $${params.length + 1}`;
+            params.push(`${cedula}%`); // Búsqueda por coincidencia inicial
+        }
+      const { rows } = await pool.query(consultaSQL, params);
       res.json(rows);
     } catch (error) {
-      console.error('Error al obtener formularios por cédula:', error);
+      console.error('Error al obtener formularios por filtro:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };
 
-
+  //http://localhost:3001/api/cliente/obtenerClientesFiltro/parametros?cedula=12&nombre=M
   export const getClienteFiltro = async (req, res) => {
     try {
         const { nombre, cedula } = req.query;
@@ -82,9 +94,9 @@ export const getFormulariosPorCedula = async (req, res) => { //Consulta para que
 
 export const createPersonaCliente = async(req, res) => {
     try {
-        const { cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
-        console.log({ cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta })
-        const result = await pool.query('INSERT INTO lab.persona_cliente (cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *', [cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta])
+        const  {cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
+        console.log({cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta })
+        const result = await pool.query('INSERT INTO lab.persona_cliente (cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *', [cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta])
         res.json(result.rows[0]);
     } catch (error) {
         console.error('Error inserting tecnico:', error);

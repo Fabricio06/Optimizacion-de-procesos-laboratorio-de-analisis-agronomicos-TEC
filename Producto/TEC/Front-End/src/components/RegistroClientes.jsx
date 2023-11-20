@@ -55,11 +55,11 @@ const RegistroClientes = () => {
         <div className='datos'>
         <form>
                 <ul id='formulario'>
-                    {/* <li>
+                    <li>
                         <label htmlFor="nombre">Nombre:</label>
                         <input type="text" id='nombre'  name='nombre' value={formData.nombre}
-            onChange={handleInputChange}/>
-                    </li> */}
+                      onChange={handleInputChange}/>
+                    </li>
                     <li>
                         <label htmlFor="cedula">Cedula:</label>
                         <input type="number" id='cedula'  name='cedula' value={formData.cedula}

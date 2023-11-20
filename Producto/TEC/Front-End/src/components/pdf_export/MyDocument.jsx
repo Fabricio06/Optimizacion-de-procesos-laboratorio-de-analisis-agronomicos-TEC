@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 
-// Create styles
+// Crea estilos
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
@@ -14,15 +14,15 @@ const styles = StyleSheet.create({
   }
 });
 
-// Create Document Component
+// Crea el documento
 const MyDocument = () => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <Text>Section #1</Text>
+        <Text>Sección #1</Text>
       </View>
       <View style={styles.section}>
-        <Text>Section #2</Text>
+        <Text>Sección #2</Text>
       </View>
     </Page>
   </Document>
