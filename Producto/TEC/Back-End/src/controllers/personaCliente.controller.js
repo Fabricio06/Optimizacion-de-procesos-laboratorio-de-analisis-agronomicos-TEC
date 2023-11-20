@@ -22,6 +22,76 @@ export const getPersonaClienteById = async(req, res) => {
     }
 }
 
+//Consulta para usarse: http://localhost:3001/api/cliente/obtenerFormularioPorFiltro/parametros?cedula=12&nombre=M
+export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que se muestren todas las muestras relacionadas a un formulario
+    try {
+      const { nombre, cedula } = req.query;
+      let consultaSQL = `
+        SELECT
+          fc.id AS formulario_id,
+          fc."clienteId" AS cliente_id,
+          pc.nombre AS nombre,
+          pc.cedula AS cedula,
+          pc.empresa AS nombre_empresa,
+          pc.telefono AS telefono_empresa,
+          pc.email_informe AS email_informe,
+          pc.email_factura AS email_factura,
+          pc.provincia AS provincia,
+          pc.canton AS canton,
+          pc.distrito AS distrito,
+          pc.otras_senas AS otras_senas,
+          pc.cultivo AS cultivo,
+          pc.boleta AS boleta
+        FROM lab.formulario fc
+        JOIN lab.persona_cliente pc ON fc."clienteId" = pc.id
+        WHERE 1=1
+      `;
+      const params = [];
+
+      if (nombre) {
+            consultaSQL += ` AND nombre ILIKE $${params.length + 1}`;
+            params.push(`${nombre}%`);
+        }
+      if (cedula) {
+            consultaSQL += ` AND cedula::text LIKE $${params.length + 1}`;
+            params.push(`${cedula}%`); // Búsqueda por coincidencia inicial
+        }
+      const { rows } = await pool.query(consultaSQL, params);
+      res.json(rows);
+    } catch (error) {
+      console.error('Error al obtener formularios por filtro:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+
+  //http://localhost:3001/api/cliente/obtenerClientesFiltro/parametros?cedula=12&nombre=M
+  export const getClienteFiltro = async (req, res) => {
+    try {
+        const { nombre, cedula } = req.query;
+        let consulta = `
+            SELECT *
+            FROM lab.persona_cliente
+            WHERE 1=1
+        `;
+        const params = [];
+
+        if (nombre) {
+            consulta += ` AND nombre ILIKE $${params.length + 1}`;
+            params.push(`${nombre}%`);
+        }
+        if (cedula) {
+            consulta += ` AND cedula::text LIKE $${params.length + 1}`;
+            params.push(`${cedula}%`); // Búsqueda por coincidencia inicial
+        }
+
+        const { rows } = await pool.query(consulta, params);
+        res.json(rows);
+    } catch (error) {
+        console.error('Error al obtener clientes por filtro', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 export const createPersonaCliente = async(req, res) => {
     try {
         const { cedula, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
@@ -38,7 +108,7 @@ export const updatePersonaCliente = async(req, res) => {
     try {
         const { id } = req.params;
         const { correoInstitucional, nombre, apellido1, apellido2, autenticarId } = req.body;
-        await pool.query('UPDATE lab.persona_cliente SET correoInstitucional = $1, nombre = $2, apellido1 = $3, apellido2 = $4, autenticarId = $5 WHERE id = $6', [correoInstitucional, nombre, apellido1, apellido2, autenticarId, id]);
+        await pool.query('UPDATE lab.persona_cliente SET correoInstitucional = $1, nombre = $2, apellido1 = $3, apellido2 = $4, "autenticarId" = $5 WHERE id = $6', [correoInstitucional, nombre, apellido1, apellido2, autenticarId, id]);
         res.json({ message: 'Tecnico actualizado exitosamente' });
     } catch (err) {
         console.error(err);
@@ -46,7 +116,7 @@ export const updatePersonaCliente = async(req, res) => {
     }
 }
 
-export const deletePersonaCliente = async(req, res) => {
+export const deletePersonaCliente = async(req, res) => { //Delete on cascade
     try {
         const { id } = req.params;
         await pool.query('DELETE FROM lab.persona_cliente WHERE id = $1', [id]);

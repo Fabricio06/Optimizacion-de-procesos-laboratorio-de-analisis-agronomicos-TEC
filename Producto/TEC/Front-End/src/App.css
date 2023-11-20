@@ -699,35 +699,37 @@ Body{
 }
 
 .historialclientes .contenedor .gridInformacion{
-  padding: 30px;
   margin-top: 2%;
   justify-content: center;
+  margin-left: 2%;
   
 }
 
 .historialclientes .contenedor .gridInformacion table {
   text-align: left;
+  justify-content: center;
 }
 
 .historialclientes .contenedor .gridInformacion table thead{
   background-color: #2B4e62;
   color: #f0f0f0;
   justify-items: center;
-  display: flex;
+  
 }
 
 .historialclientes .contenedor .gridInformacion table tbody{
   background-color: #f0f0f0;
   color: #2B4e62;
   justify-items: center;
-  display: flex;
+  font-weight: lighter;
+  
   
 }
 
 
 .historialclientes .contenedor .gridInformacion table td b{
   padding-right: 30px;
-  padding-left: 20px;
+  padding-left: 15px;
   background-color: #2B4e62;
 }
 
@@ -767,4 +769,7 @@ Body{
   margin: 5px;
   font-size: 20px;
   padding: 5px;
+}
+.historialclientes footer{
+  margin-top: 35%;
 }

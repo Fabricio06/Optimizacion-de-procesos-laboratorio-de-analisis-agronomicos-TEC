@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: <Login/>,
   },
   {
-    path: "App",
+    path: "App", //Recordar aplicar Require Login aquí
     element: <App/>,
   },
   {

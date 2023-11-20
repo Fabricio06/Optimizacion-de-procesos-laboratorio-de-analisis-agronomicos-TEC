@@ -10,7 +10,7 @@ router.get('/',getPersonaTecnico );
 router.get('/:id',getPersonaTecnicoById );
 
 // Crear un nuevo tecnico
-router.post('/', createPersonaTecnico);
+router.post('/register', createPersonaTecnico);
 
 // Actualizar un tecnico
 router.put('/:id', updatePersonaTecnico);

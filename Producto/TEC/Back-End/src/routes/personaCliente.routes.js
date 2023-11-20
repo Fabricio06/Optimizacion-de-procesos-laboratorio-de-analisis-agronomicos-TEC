@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {getPersonaCliente, getPersonaClienteById, createPersonaCliente, 
-        updatePersonaCliente, deletePersonaCliente} from '../controllers/personaCliente.controller.js';
+        updatePersonaCliente, deletePersonaCliente, getFormulariosPorFiltro, getClienteFiltro} from '../controllers/personaCliente.controller.js';
 const router = Router()
 
 // Obtener todos los clientes
@@ -17,6 +17,11 @@ router.put('/:id', updatePersonaCliente);
 
 // Eliminar un cliente
 router.delete('/:id', deletePersonaCliente);
+
+// Obtener un formulario por cédula
+router.get('/obtenerFormularioPorFiltro/parametros', getFormulariosPorFiltro);
+
+router.get('/obtenerClientesFiltro/parametros', getClienteFiltro)
 
 export default router
 
