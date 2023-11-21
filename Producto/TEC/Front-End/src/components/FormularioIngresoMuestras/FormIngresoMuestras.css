@@ -289,11 +289,12 @@ padding-right: 30px;
 /*Style ClientesSelectorPage*/
 
 .ClientesSelectorPage{
-  background-color: white;
-  padding: 30px;
+  background-color: #BBD6E6; 
+  padding: 0px;
 }
 
 .ClientesSelectorPage .filtros-datagrid{
+  background-color: #BBD6E6;
   display: flex;
   flex-wrap: wrap;
 }
@@ -302,6 +303,70 @@ padding-right: 30px;
   width: 100px;
   height: 15px;
 }
+
+.ClientesSelectorPage .filtrosInput input{
+  display: inline-block;
+	width: 20%;
+	cursor: pointer;
+  padding: 3px 3px;
+  height: 20px;
+  outline: 0; 
+	border-radius: 0;
+	background: #fff;
+	color: #fff;
+	font-size: 1em;
+	color: #fff;
+	border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+  margin: 5px;  
+}
+
+.ClientesSelectorPage .css-ptkaw2-MuiDataGrid-root{
+  background-color: #FFF;
+}
+
+
+.FormulariosSelectorPage{
+  background-color: #BBD6E6; 
+  padding: 0px;
+}
+
+.FormulariosSelectorPage .filtros-datagrid{
+  background-color: #BBD6E6;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.FormulariosSelectorPage .filtros-datagrid input{
+  width: 100px;
+  height: 15px;
+}
+
+.FormulariosSelectorPage .filtrosInput input{
+  display: inline-block;
+	width: 20%;
+	cursor: pointer;
+  padding: 3px 3px;
+  height: 20px;
+  outline: 0; 
+	border-radius: 0;
+	background: #fff;
+	color: #fff;
+	font-size: 1em;
+	color: #fff;
+	border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+  margin: 5px;  
+}
+
+.FormulariosSelectorPage .css-ptkaw2-MuiDataGrid-root{
+  background-color: #FFF;
+}
+
 
 
 
