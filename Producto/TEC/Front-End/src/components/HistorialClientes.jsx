@@ -124,7 +124,7 @@ const HistorialClientes = () =>{
                     <Menu/>
                 </div>
                 <ThemeProvider theme={tema}>
-                    <div style={{ margin: '10px 0' }}>
+                    <div className='filtrosInput' style={{ margin: '20px 0' }}>
                         <p>Filtrar por nombre</p>
                         <input
                             type="text"
@@ -140,7 +140,7 @@ const HistorialClientes = () =>{
                             placeholder="Filtrar por cédula"
                         />
                     </div>
-                    <div style={{ 'min-height': '100vh', width: '100%' }}>
+                    <div style={{ 'min-height': '100vh', width: '100%'}}>
                         <DataGrid
                             rows={clientesFiltrados}
                             columns={columns}

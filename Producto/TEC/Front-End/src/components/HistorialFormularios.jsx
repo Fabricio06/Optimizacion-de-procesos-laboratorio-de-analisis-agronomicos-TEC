@@ -137,7 +137,7 @@ const HistorialFormularios = () =>{
                     <Menu/>
                 </div>
                 <ThemeProvider theme={tema}>
-                    <div style={{ margin: '10px 0' }}>
+                    <div className = 'filtrosInput' style={{ margin: '10px 0' }}>
                         <p>Filtrar por nombre</p>
                         <input
                             type="text"
