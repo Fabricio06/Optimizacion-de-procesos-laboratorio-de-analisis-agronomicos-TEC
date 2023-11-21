@@ -132,6 +132,7 @@ const EliminarEditarClientes = () =>{
                 
                 <div className='botones'>
                     <button onClick={enviarDatos}>Aplicar cambios</button>
+                    <button type='submit'><a href="/historialClientes">Volver</a></button>
                 </div>
         </div>
 
