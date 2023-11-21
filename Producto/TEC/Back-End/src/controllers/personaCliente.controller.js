@@ -40,12 +40,12 @@ export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que 
       let consultaSQL = `
         SELECT
           fc.id AS formulario_id,
-          fc.orden_compra AS #_orden_compra,
+          fc.orden_compra AS orden_compra,
           fc.recibido_por AS recibido_por,
           fc.fecha_envio AS fecha_envio,
           fc.solicitud_factura AS solicitud_factura,
           fc.costo_analisis AS costo_de_analisis,
-          fc.iva AS AS iva,
+          fc.iva AS iva,
           fc.total_pagar AS total_a_pagar,
           fc.factura_banco AS factura_de_banco,
           pc.nombre AS nombre,
@@ -61,7 +61,7 @@ export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que 
           pc.cultivo AS cultivo,
           pc.boleta AS boleta
         FROM lab.formulario fc
-        JOIN lab.persona_cliente pc ON fc."clienteId" = pc.id
+        JOIN lab.persona_cliente pc ON fc."cliente_id" = pc.cedula
         WHERE 1=1
       `;
       const params = [];
