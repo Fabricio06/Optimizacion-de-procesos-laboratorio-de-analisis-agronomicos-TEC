@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';  
-import { useForm } from 'react-hook-form';
 
 import { obtenerFechaFormateada } from '../../functions/manejo_de_fechas';
 
-const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
+const FormIngresoMuestraDatosCliente = ({ register,setValue}) => {
 
     const navigate = useNavigate();
 
@@ -57,12 +56,12 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                 {/* Cliente */}
                     <div className="form-row">
                         <label htmlFor="cliente">CLIENTE:</label>
-                        <input
+                        <input required
                             type="text"
                             id="cliente"
                             name="cliente"
-                            {...register('nombre')}
-                        />
+                            {...register('nombre', { required: 'El nombre es requerido',minLength: 2  })}
+                        /> 
                     </div>
 
                     {/* Fecha */}
@@ -72,7 +71,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="date"
                             id="fecha"
                             name="fecha"
-                            {...register('fecha')}
+                            {...register('fecha', { required: 'la fecha es requerida',minLength: 2  })}
                         />
                     </div>
                 </div>
@@ -85,8 +84,8 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="empresa"
                             name="empresa"
-                            {...register('empresa')}
-                        />
+                            {...register('empresa', { required: false, minLength: 2 })}
+                        /> 
                     </div>
 
                     {/* Boleta */}
@@ -96,8 +95,8 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="boleta"
                             name="boleta"
-                            {...register('boleta')}
-                        />
+                            {...register('boleta', {required:false, minLength: 1, maxLength: 9})}
+                        /> 
                     </div>
                 </div>
                 
@@ -109,7 +108,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="number"
                             id="telefono"
                             name="telefono"
-                            {...register('telefono')}
+                            {...register('telefono',{ required: 'El telefono es requerido', minLength: 8, maxLength: 9 })}
                         />
                     </div>
 
@@ -120,7 +119,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="email"
                             id="emailInforme"
                             name="emailInforme"
-                            {...register('emailInforme')}
+                            {...register('emailInforme',  { required: true, pattern: /^\S+@\S+\.\S+$/ })}
                         />
                     </div>
 
@@ -134,7 +133,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="number"
                             id="cedula"
                             name="cedula"
-                            {...register('cedula')}
+                            {...register('cedula',{ required: 'La cedula es requerida',  minLength: 8, maxLength: 9 })}
                         />
                     </div>
 
@@ -145,7 +144,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="email"
                             id="emailFactura"
                             name="emailFactura"
-                            {...register('emailFactura')}
+                            {...register('emailFactura',{ required: true, pattern: /^\S+@\S+\.\S+$/ })}
                         />
                     </div>
                 </div>
@@ -158,7 +157,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="provincia"
                             name="provincia"
-                            {...register('provincia')}
+                            {...register('provincia',{ required: false, minLength: 2 })}
                         />
                     </div>
 
@@ -169,7 +168,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="canton"
                             name="canton"
-                            {...register('canton')}
+                            {...register('canton',{ required: false, minLength: 2 })}
                         />
                     </div>
 
@@ -180,7 +179,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="distrito"
                             name="distrito"
-                            {...register('distrito')}
+                            {...register('distrito', { required: false, minLength: 2 })}
                         />
                     </div>
                 </div>
@@ -192,7 +191,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="otrasSenas"
                             name="otrasSenas"
-                            {...register('otrasSenas')}
+                            {...register('otrasSenas', { required: false })}
                         />
                     </div>
                 </div>
@@ -205,7 +204,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="cultivo"
                             name="cultivo"
-                            {...register('cultivo')}
+                            {...register('cultivo', { required: true })}
                         />
                     </div>
 
@@ -216,15 +215,14 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="muestraEntregada"
                             name="muestraEntregada"
-                            {...register('muestraEntregada')}
+                            {...register('muestraEntregada', { required: false })}
                         />
                     </div>
                 </div>
+
             </form>
-            <button type='button' onClick={handleVincularCliente}>Vincular cliente</button>
-            <button type='button' onClick={ClearCliente}>Limpiar espacios</button>
-
-
+            <button type='button' className='botonClientes' id='vincular-cliente-boton' onClick={handleVincularCliente}>Vincular cliente</button>
+            <button type='button' className='botonClientes' id='limpiar-datos-cliente-boton' onClick={ClearCliente}>Limpiar espacios</button>
             <hr className='line-below-div' />
         </div>
     );

@@ -9,7 +9,8 @@
 /*Styles de la tabla en el encabezado*/
 
 .headerTable{
-  padding: 30px;
+  padding-left: 30px;
+padding-right: 30px;
 }
 
 .headerTable p{
@@ -53,15 +54,15 @@
   border: none;
   height: 3px;
   background-color: gray; 
-  margin-top: 40px; 
+  margin-top: 20px;
+  margin-bottom: 10px
 }
 
 /*Styles de los datos del cliente*/
 
 .FormIngresoMuestraDatosCliente{
-  padding: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-left: 30px;
+  padding-right: 30px;  
 }
 
 .FormIngresoMuestraDatosCliente form{
@@ -94,6 +95,15 @@
   display: flex;
 }
 
+.FormIngresoMuestraDatosCliente .botonClientes ,.body-table .botonClientes { 
+  display: inline-flex;
+  width: 90px;  
+  margin-right: 10px;
+  background-color: #81EC81;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+}
 
 .linea-1-clientes .form-row:first-child{
   flex-basis: 70%;
@@ -143,7 +153,8 @@
 
 /*Styles FormIngresoMuestrasBody*/
   .body-table{
-    padding: 30px;
+    padding-left: 30px;
+padding-right: 30px;
   }
 
   .form-table table {
@@ -208,7 +219,8 @@
   display: flex;
   flex-wrap: wrap; /* Permite que los elementos se apilen si no hay espacio suficiente */
   justify-content: space-between;
-  padding: 30px;
+  padding-left: 30px;
+padding-right: 30px;
   padding-top: 0px;
 }
 
@@ -241,11 +253,57 @@
   border-bottom: 2px solid green;
 }
 
+/*Styles out footer*/
+
+
+.botonesExportaciones{
+  display: flex;
+
+}
+
+#opcionesExport,.botonClientes{  
+  width: 170px;  
+  padding: 10px;
+  background-color: #81EC81;
+  border: none; 
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+#opcionesExport:hover,.botonClientes:hover,#button-agregar-tablas:hover{
+  background-color: green;
+  color: white;
+}
+
+.form-botton-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+}
+
+.botonClientes{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;  
+}
 /*Style ClientesSelectorPage*/
 
 .ClientesSelectorPage{
   background-color: white;
+  padding: 30px;
 }
+
+.ClientesSelectorPage .filtros-datagrid{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ClientesSelectorPage .filtros-datagrid input{
+  width: 100px;
+  height: 15px;
+}
+
+
 
 
 /*Style Responsive*/
