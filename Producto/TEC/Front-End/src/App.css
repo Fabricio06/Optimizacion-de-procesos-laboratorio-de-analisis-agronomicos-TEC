@@ -102,21 +102,6 @@
   padding: 25px;
 }
 
-.menu li{
-  display: inline;
-  
-}
-.menu ul{
-  display: inline; 
-}
-
-.menu a{
-  color: #fff;
-  padding: 19px;
-  text-decoration: none;
-}
-
-
 .Main{
   background-color: #BBD6E6;
   height: 80%;
@@ -413,18 +398,85 @@ Body{
 }
 
 
-.menu{
-  width: 100%;
-  background-color: #2B4e62;
+.Menu{
+  background: #2B4e62;
+  height: 60px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1; 
-  top: 0;
-  height: 100%;
+  z-index: 2;
+}
+
+.nav-logo a{
+  font-weight: lighter;
+  
+  margin: 15px;
+  color: #fff;
+  text-decoration: none; 
+}
+
+.nav_items a{
+  color:#fff;
+  text-decoration: none;
+  padding: 15px;
+  font-weight: lighter;
 
 }
+
+@media (max-width: 768px){
+  .nav_items{
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #2B4e62;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 300%;
+    transform: translateX(-100%);
+    transition: 0.3s ease all;
+    z-index: 1;
+  }
+  .nav_items a{
+    color:#fff;
+    text-decoration: none;
+    padding: 15px;
+    font-weight: bold;
+
+  }
+  .nav_items.open{
+    transform: translateX(0) !important;
+  }
+  .nav_toggle{
+    display: flex !important;
+    flex-direction: column;
+    margin: 15px;
+  }
+  .nav_toggle span{
+    width: 30px;
+    height: 4px;
+    background: white;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    transform-origin: 5px 0px;
+    transition: all 0.2s linear;
+  }
+  .nav_toggle.open > span{
+    transform: rotate(45deg) translate(0px, 0px);
+  }
+  .nav_toggle.open > span:nth-child(2){
+    display: none;
+  }
+  .nav_toggle.open > span:nth-child(3){
+    transform: rotate(-45deg) translate(-5px, 1px);
+  }
+  
+}
+
+
+
+
+
 
 
 .datosclientes form ul li{
@@ -773,3 +825,146 @@ Body{
 .historialclientes footer{
   margin-top: 35%;
 }
+
+.perfilUsuario .contenedor{
+  margin-left: 20%;
+  margin-top: 5%;
+}
+
+.perfilUsuario .image{
+    margin: 0 auto;
+    width: 95px;
+    height: 102px;
+    border-radius: 50%;
+    border: 1px solid #2B4e62;
+    display: inline-block;
+    padding: 3px;
+    margin-top: 20px;
+    margin-right: 57px;
+    margin-left: 57px;
+
+}
+
+.perfilUsuario .left{
+  float: left;
+  width: 214px;
+  height: 366px;
+}
+.perfilUsuario .right{
+  float: right;
+  display: table;
+  width: 60%;
+  margin-top: 40px;
+}
+.fa{
+  display: inline-block;
+}
+
+.form-control {
+  border-radius: 0;
+  box-shadow: none;
+  border-color: #d2d6de;
+}
+.form-control {
+  display: block;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+}
+
+.perfilUsuario label{
+  cursor: default;
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.perfilUsuario input{
+  display: inline-block;
+	width: 40%;
+	cursor: pointer;
+  padding: 3px 3px;
+  height: 20px;
+  outline: 0; 
+	border-radius: 0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+	border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+  margin: 5px;
+}
+
+.username{
+  font-size: 21px;
+  margin-top: 5px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.perfilUsuario .btn{
+  margin: 0 auto;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  
+  touch-action: manipulation;
+  margin-top: 100px;
+}
+
+.perfilUsuario .contenedor a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.perfilUsuario .btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  display: block;
+}
+
+.perfilUsuario .form-horizontal .form-group {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.perfilUsuario .form-group {
+  margin-bottom: 15px;
+}
+
+
+
+
+
+.perfilUsuario .btn {
+border-radius: 3px;
+box-shadow: none;
+border: 1px solid transparent;
+}
+
+.perfilUsuario .left {
+  position: relative;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  padding: 10px;
+  margin-left: 70px;
+  margin-top: 40px;
+}
+
+
