@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect} from 'react';
 
 const FooterTable = ({register}) => {
+
   return (
     <div className='footer-table'>
       <form >
@@ -11,7 +12,7 @@ const FooterTable = ({register}) => {
               type="text" 
               id="recibido" 
               name="recibido"
-              {...register('recibidoPor')}
+              {...register('recibidoPor',{required:'Se requiere este espacio'})}
             />
           </div>
           <div className="form-group">
@@ -20,7 +21,7 @@ const FooterTable = ({register}) => {
               type="date" 
               id="fechaEnvio" 
               name="fechaEnvio"
-              {...register('fechaEnvio')}
+              {...register('fechaEnvio',{required:'Se requiere este espacio'})}
             />
           </div>
           <div className="form-group">
@@ -29,7 +30,7 @@ const FooterTable = ({register}) => {
               type="text" 
               id="solicitudCredito" 
               name="solicitudCredito"
-              {...register('solicitudDeFacturaCredito')}
+              {...register('solicitudDeFacturaCredito',{required:'Se requiere este espacio'})}
             />
           </div>
           <div className="form-group">
@@ -38,36 +39,36 @@ const FooterTable = ({register}) => {
               type="text" 
               id="ordenCompra" 
               name="ordenCompra"
-              {...register('ordenCompra')}
+              {...register('ordenCompra',{required:'Se requiere este espacio'})}
             />
           </div>
         </div>
         <div className='footer-derecha'>
           <div className="form-group">
-            <label htmlFor="costoAnalisis">Costo de Análisis €:</label>
+            <label htmlFor="costoAnalisis">Costo de Análisis ₡:</label>
             <input 
               type="number" 
               id="costoAnalisis" 
               name="costoAnalisis"
-              {...register('costoAnalisis')} 
+              {...register('costoAnalisis',{required:'Se requiere este espacio', minLength: 8, maxLength: 9})} 
             />
           </div>
           <div className="form-group">
-            <label htmlFor="iva">2% IVA €:</label>
+            <label htmlFor="iva">2% IVA ₡:</label>
             <input 
               type="number" 
               id="iva" 
               name="iva"
-              {...register('IVA')} 
+              {...register('IVA',{required:'Se requiere este espacio', minLength: 8, maxLength: 9})} 
             />
           </div>
           <div className="form-group">
-            <label htmlFor="totalPagar">Total a Pagar €:</label>
+            <label htmlFor="totalPagar">Total a Pagar ₡:</label>
             <input 
               type="number" 
               id="totalPagar" 
               name="totalPagar"
-              {...register('totalPagar')}
+              {...register('totalPagar',{required:'Se requiere este espacio', minLength: 8, maxLength: 9})}
             />
           </div>
           <div className="form-group">
@@ -76,7 +77,7 @@ const FooterTable = ({register}) => {
               type="text" 
               id="facturaBanco" 
               name="facturaBanco"
-              {...register('facturaBanco')}
+              {...register('facturaBanco',{required:'Se requiere este espacio'})}
             />
           </div>
         </div>

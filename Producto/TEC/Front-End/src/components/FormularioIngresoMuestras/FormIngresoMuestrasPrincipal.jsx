@@ -1,21 +1,30 @@
-import React, {useRef} from 'react';
-import { useForm, setValue } from 'react-hook-form';
+import React, { useRef} from 'react';
+import { useForm} from 'react-hook-form';
 import './FormIngresoMuestras.css';
 import HeaderTable from './FormIngresoMuestraTablaH';
 import DatosCliente from './FormIngresoMuestraDatosCliente';
 import BodyTable from './FormIngresoMuestrasBody';
 import FooterTable from './FormIngresoMuestrasFooter';
+import { useNavigate } from 'react-router-dom';  
+import { useReactToPrint } from 'react-to-print';
 
 import { exportarAPDF, exportarAImagen, exportarAExcel, 
-        exportarADocx, ExportarAImpresora } from '../../functions/exports/exportaciones_de_archivos';
+        exportarADocx } from '../../functions/exports/exportaciones_de_archivos';
 
 const SampleForm = () => {  
+  const navigate = useNavigate();
   const pdfContentRef = useRef(null);
-  const { register, handleSubmit, formState: { errors }, setValue , getValues} = useForm();
+  const { register, handleSubmit, setValue , getValues,  formState: { errors }} = useForm();
   const handleDataFromChild = (tableData) => {
     setValue('tablaDatos', tableData);
   };
-
+  const volver = () => {
+    navigate('/App');
+  };
+  const handlePrint = useReactToPrint({
+    content: () => pdfContentRef.current,
+  });
+  
 
   function procesarExportacion(elementId, newStyles, tipoExportacion) {
     const element = document.getElementById(elementId);
@@ -30,7 +39,11 @@ const SampleForm = () => {
       for (const key in newStyles) {
         element.style[key] = newStyles[key];
       }
+      ocultarElementos(); // Ocultar antes de exportar;
       switch (tipoExportacion) {
+        case "IMPRIMIR":
+          handlePrint({content: () => pdfContentRef.current,});
+          break;
         case "PDF":
           exportarAPDF(pdfContentRef);
           break;
@@ -46,9 +59,9 @@ const SampleForm = () => {
         default:
           alert('Tipo de exportación no reconocida');
           break;
+        
       }
-      
-  
+      mostrarElementos(); // Mostrar después de exportar
       // Restablecer los estilos originales
       for (const key in originalStyles) {
         element.style[key] = originalStyles[key];
@@ -88,6 +101,10 @@ const SampleForm = () => {
   const realizarPeticionesConRollback = async () => {
     try {
       const valores = obtenerDatosParaExportar();
+      if(valores.tablaDatos==null){
+        alert('tienes que llenar por lo menos una tabla');
+        return;
+      }
       let respuestaClienteExistente = await fetch(`http://localhost:3001/api/cliente/cedula/${valores.cedula}`);
       let clienteExistente = false;
   
@@ -100,10 +117,7 @@ const SampleForm = () => {
           clienteExistente = false;
         }
       }
-      console.log(clienteExistente.ok);
-      console.log(respuestaClienteExistente);
-      console.log(valores)
-      
+
       if(!clienteExistente){
         await realizarPeticionConJSON('http://localhost:3001/api/cliente/registrarCliente', {
             cedula: valores.cedula,
@@ -141,17 +155,85 @@ const SampleForm = () => {
         });
     }
       
-      
-      //const resultado2 = await realizarPeticionConJSON('URL2', { /* datos para URL2 */ });
-      
-      // Continuar con la lógica si todas las peticiones son exitosas
-  
     } catch (error) {
       throw error;
     }
   };
+  function manejarExportacion(event) {
+    const opcion = event.target.value;
+    switch (opcion) {
+      case 'imprimir':
+        procesarExportacion("contenido-exportar", { width: "900px" }, "IMPRIMIR")
+        break;
+      case 'pdf':
+        procesarExportacion("contenido-exportar", { width: "900px" }, "PDF");
+        break;
+      case 'excel':
+        procesarExportacion("contenido-exportar", { width: "900px" }, "EXCEL");
+        break;
+      case 'word':
+        procesarExportacion("contenido-exportar", { width: "900px" }, "DOCX");
+        break;
+      case 'imagen':
+        procesarExportacion("contenido-exportar", { width: "900px" }, "IMG");
+        break;
+      default:
+        console.log("Opción no reconocida");
+    }
+  }
   
+  const ocultarElementos = () => {
+    const elementosOcultar = [
+      'button-agregar-tablas',
+      'vincular-cliente-boton',
+      'limpiar-datos-cliente-boton',
+      'opcionesExport',
+      'guardar-boton',
+      'boton-volver',
+    ];
+  
+    elementosOcultar.forEach((elementId) => {
+      const element = document.getElementById(elementId);
+      if (element) {
+        // Guardar el estilo original
+        element.dataset.originalStyle = element.style.cssText;
+  
+        // Ocultar el elemento
+        element.style.display = "none";
+      }
+    });
+  };
+  
+  // Función para mostrar los elementos nuevamente
+  const mostrarElementos = () => {
+    const elementosMostrar = [
+      'button-agregar-tablas',
+      'vincular-cliente-boton',
+      'limpiar-datos-cliente-boton',
+      'opcionesExport',
+      'guardar-boton',
+      'boton-volver',
+    ];
+  
+    elementosMostrar.forEach((elementId) => {
+      const element = document.getElementById(elementId);
+      if (element) {
+        // Restaurar el estilo original
+        const originalStyle = element.dataset.originalStyle;
+        if (originalStyle) {
+          element.style.cssText = originalStyle;
+        } else {
+          // Si no hay estilo original, mostrar el elemento de manera predeterminada
+          element.style.display = "";
+        }
+      }
+    });
     
+
+
+
+  };
+  
 
   return (
     <div className="form-container">
@@ -159,19 +241,33 @@ const SampleForm = () => {
        
        <HeaderTable />
        <form onSubmit={handleSubmit(realizarPeticionesConRollback)}>
-          <DatosCliente register={register} setValue={setValue} />
+          <DatosCliente register={register} setValue={setValue}  />
           <BodyTable onDataSubmit={handleDataFromChild}/>
           <FooterTable register={register}/>
       {/* Submit Button */}
-      <button type="submit">Enviar</button>
+        <div className='form-botton-container'>
+          <button id='guardar-boton'  className='botonClientes' type="submit">Guardar</button>
+        </div>
        </form>
        
        </div>
-       <button onClick={ExportarAImpresora}>Imprimir PDF</button>
-       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "PDF")}>Exportar a PDF</button>
-       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "EXCEL")}>Exportar a Excel</button>
-       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "DOCX")}>Exportar a Word</button>
-       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "IMG")}>Exportar como Imagen</button>
+
+       <div className='.botonesFinales' style={{display: 'flex' }}>
+       <div style={{ paddingRight: '30px', display: 'flex' }}>
+        <button onClick={volver} className='botonClientes' id='boton-volver'  type='button'>Volver</button>
+        </div>
+
+       <div className='botonesExportaciones'>
+        <select name="opcionesExport" id="opcionesExport" onChange={manejarExportacion}>
+          <option selected>Exportar a:</option>
+          <option value="imprimir">Imprimir PDF</option>
+          <option value="pdf">Exportar a PDF</option>
+          <option value="excel">Exportar a Excel</option>
+          <option value="word">Exportar a Word</option>
+          <option value="imagen">Exportar como Imagen</option>
+        </select>
+        </div>
+      </div>
     </div>
     
   );

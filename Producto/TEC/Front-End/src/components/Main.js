@@ -22,7 +22,7 @@ const Main = () => {
                 <div className='option'>
                     <h3>Registro e Ingreso de Muestras de tierra</h3>
                     <p>Formulario para muestras de laboratorio</p>
-                    <p>Ingrese <strong><a href='/formulariosMuestras'>aquí</a></strong></p>
+                    <p>Ingrese <strong><a href='/FormularioIngresoMuestras'>aquí</a></strong></p>
                     <img src={Icono1}/>
                 </div>
                 <div className='option'>
@@ -34,7 +34,7 @@ const Main = () => {
                 <div className='option'>
                     <h3>Creación de bitácoras</h3>
                     <p>Seleccionar el tipo de bitácora y rellenar con nuevos datos</p>
-                    <p>Ingrese <strong> <a href='#'>aquí</a></strong></p>
+                    <p>Ingrese <strong> <a href='/formulariosMuestras'>aquí</a></strong></p>
                     <img src={Icono3}/>
                 </div>
             </div>
