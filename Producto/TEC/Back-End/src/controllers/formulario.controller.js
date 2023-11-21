@@ -24,21 +24,29 @@ export const getFormularioById = async(req, res) => {
 
 export const createFormulario = async (req, res) => {
     try {
-        const { clienteId } = req.body;
-        console.log({ clienteId })
-        const result = await pool.query('INSERT INTO lab.formulario ("clienteId") VALUES ($1) RETURNING *', [clienteId])
+        const { cliente_id, recibido_por, fecha_envio, solicitud_factura, orden_compra, costo_analisis, iva, total_pagar, factura_banco } = req.body;
+        console.log({ cliente_id, recibido_por, fecha_envio, solicitud_factura, orden_compra, costo_analisis, iva, total_pagar, factura_banco });
+
+        const query = `
+            INSERT INTO lab.formulario 
+            ("cliente_id", "recibido_por", "fecha_envio", "solicitud_factura", "orden_compra", "costo_analisis", "iva", "total_pagar", "factura_banco") 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
+            RETURNING *`;
+
+        const values = [cliente_id, recibido_por, fecha_envio, solicitud_factura, orden_compra, costo_analisis, iva, total_pagar, factura_banco];
+
+        const result = await pool.query(query, values);
         res.json(result.rows[0]);
     } catch (error) {
         console.error('Error inserting formulario:', error);
         res.status(500).json({ error: error.message });
     }
-}
-
+};
 export const updateFormulario = async(req, res) => {
     try {
         const { id } = req.params;
-        const { clienteId } = req.body;
-        await pool.query('UPDATE lab.formulario SET "clienteId" = $1 WHERE id = $2', [clienteId, id]);
+        const { cliente_id } = req.body;
+        await pool.query('UPDATE lab.formulario SET "cliente_id" = $1 WHERE id = $2', [cliente_id, id]);
         res.json({ message: 'Formulario actualizado exitosamente' });
     } catch (err) {
         console.error(err);

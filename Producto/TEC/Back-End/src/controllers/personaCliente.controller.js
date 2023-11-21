@@ -22,6 +22,17 @@ export const getPersonaClienteById = async(req, res) => {
     }
 }
 
+export const getPersonaClienteByCedula = async(req, res) => {
+    try {
+        const { cedula } = req.params;
+        const result = await pool.query('SELECT * FROM lab.persona_cliente WHERE cedula = $1', [cedula]);
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
 //Consulta para usarse: http://localhost:3001/api/cliente/obtenerFormularioPorFiltro/parametros?cedula=12&nombre=M
 export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que se muestren todas las muestras relacionadas a un formulario
     try {
@@ -99,7 +110,7 @@ export const createPersonaCliente = async(req, res) => {
         const result = await pool.query('INSERT INTO lab.persona_cliente (cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *', [cedula,nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta])
         res.json(result.rows[0]);
     } catch (error) {
-        console.error('Error inserting tecnico:', error);
+        console.error('Error inserting cliente:', error);
         res.status(500).json({ error: error.message });
     }
 }

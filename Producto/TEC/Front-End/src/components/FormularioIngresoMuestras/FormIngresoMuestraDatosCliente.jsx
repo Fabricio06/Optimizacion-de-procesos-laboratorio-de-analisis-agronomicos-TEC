@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Cambio aquí  
+import { useNavigate } from 'react-router-dom';  
 import { useForm } from 'react-hook-form';
+
+import { obtenerFechaFormateada } from '../../functions/manejo_de_fechas';
 
 const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
 
@@ -15,8 +17,16 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
             setValue('nombre', datosCliente.nombre);
             setValue('empresa', datosCliente.empresa);
             setValue('telefono', datosCliente.telefono);
-            setValue('emailInforme', datosCliente.emailInforme);
-            // Continúa asignando otros campos necesarios...
+            setValue('emailInforme', datosCliente.email_informe);
+            setValue('emailFactura', datosCliente.email_factura);
+            setValue('provincia', datosCliente.provincia);
+            setValue('canton', datosCliente.canton);
+            setValue('distrito', datosCliente.distrito);  
+            setValue('otrasSenas', datosCliente.otras_senas);
+            setValue('cedula', datosCliente.cedula);
+            setValue('cultivo', datosCliente.cultivo);
+            setValue('boleta', datosCliente.boleta);
+            setValue('fecha', obtenerFechaFormateada());
             localStorage.removeItem('clienteSeleccionado');
         }
     }, [setValue]);

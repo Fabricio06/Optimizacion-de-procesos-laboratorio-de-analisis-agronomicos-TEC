@@ -6,55 +6,18 @@ import DatosCliente from './FormIngresoMuestraDatosCliente';
 import BodyTable from './FormIngresoMuestrasBody';
 import FooterTable from './FormIngresoMuestrasFooter';
 
-
-import { useReactToPrint } from 'react-to-print';
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
-import htmlDocx from 'html-docx-js/dist/html-docx';
+import { exportarAPDF, exportarAImagen, exportarAExcel, 
+        exportarADocx, ExportarAImpresora } from '../../functions/exports/exportaciones_de_archivos';
 
 const SampleForm = () => {  
   const pdfContentRef = useRef(null);
   const { register, handleSubmit, formState: { errors }, setValue , getValues} = useForm();
-  const onSubmit = data => {
-      // Aquí manejas los datos del formulario
-      console.log(data);
-  };
-
   const handleDataFromChild = (tableData) => {
     setValue('tablaDatos', tableData);
   };
 
-  const exportPDF = () => {
-    const pdfWidth = 200; // Ancho deseado para el PDF en milímetros
-    const scaleFactor = 2; // Escala fija para la captura del canvas
-  
-    html2canvas(pdfContentRef.current, {
-      scale: scaleFactor, // Usar una escala fija
-      useCORS: true // Para manejar contenido externo, si es necesario
-    }).then(canvas => {
-      const canvasAspectRatio = canvas.height / canvas.width;
-      const pdfHeight = pdfWidth * canvasAspectRatio;
-  
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        unit: 'mm',
-        format: [pdfWidth, pdfHeight] // Establecer formato personalizado
-      });
-  
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save("formulario.pdf");
-    });
-  };
-  
 
-
-  const handlePrint = useReactToPrint({
-    content: () => pdfContentRef.current,
-  });
-
-  function changeStyle(elementId, newStyles) {
+  function procesarExportacion(elementId, newStyles, tipoExportacion) {
     const element = document.getElementById(elementId);
     if (element) {
       // Guardar los estilos originales
@@ -67,9 +30,24 @@ const SampleForm = () => {
       for (const key in newStyles) {
         element.style[key] = newStyles[key];
       }
-  
-      // Exportar a PDF
-      exportPDF();
+      switch (tipoExportacion) {
+        case "PDF":
+          exportarAPDF(pdfContentRef);
+          break;
+        case "IMG":
+          exportarAImagen(pdfContentRef, 'png', 'ImagenExportada');
+          break;
+        case "EXCEL":
+          exportarAExcel(obtenerDatosParaExportar(), "DatosExportados");
+          break;
+        case "DOCX":
+          exportarADocx(obtenerDatosParaExportar(), "Documento");
+          break;
+        default:
+          alert('Tipo de exportación no reconocida');
+          break;
+      }
+      
   
       // Restablecer los estilos originales
       for (const key in originalStyles) {
@@ -80,94 +58,107 @@ const SampleForm = () => {
     }
   }
 
-  const exportToExcel = (data, fileName) => {
-    // Crear una hoja para los datos principales
-    if(!data.tablaDatos){
-      alert('Tabla vacía')
-      return;
-    }
-    const mainData = { ...data };
-    delete mainData.tablaDatos; // Excluir la tabla de datos anidados para evitar duplicados
-    const mainWorksheet = XLSX.utils.json_to_sheet([mainData]); // Convertir a arreglo para mantener la consistencia
   
-    // Crear una hoja para los datos anidados
-    const nestedDataWorksheet = XLSX.utils.json_to_sheet(data.tablaDatos);
-  
-    // Crear un nuevo libro de trabajo y agregar las dos hojas
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, mainWorksheet, "Datos Principales");
-    XLSX.utils.book_append_sheet(workbook, nestedDataWorksheet, "Datos de la tabla");
-  
-    // Guardar el libro de trabajo en un archivo
-    XLSX.writeFile(workbook, `${fileName}.xlsx`);
-  };
-  
-
-  const exportToImage = (elementRef, format = 'png', fileName = 'image') => {
-    html2canvas(elementRef.current).then(canvas => {
-      const dataURL = canvas.toDataURL(`image/${format}`);
-      saveAs(dataURL, `${fileName}.${format}`);
-    });
-  };
-
   const obtenerDatosParaExportar = () => {
     const formData = getValues(); // Obtiene los datos del formulario
     return formData;
   };
   
+  const realizarPeticionConJSON = async (url, datos) => {
+    try {
+      const respuesta = await fetch(url, {
+        method: 'POST', // o 'PUT' si estás actualizando datos
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos),
+      });
   
+      if (!respuesta.ok) {
+        throw new Error(`Error en la respuesta: ${respuesta.status}`);
+      }
   
+      const resultado = await respuesta.json();
+      return resultado;
+    } catch (error) {
+      console.error('Error en la petición fetch:', error);
+      throw error; // Lanzar el error para manejarlo en una lógica superior
+    }
+  };
+  const realizarPeticionesConRollback = async () => {
+    try {
+      const valores = obtenerDatosParaExportar();
+      let respuestaClienteExistente = await fetch(`http://localhost:3001/api/cliente/cedula/${valores.cedula}`);
+      let clienteExistente = false;
   
-  const exportToDoc = (data, fileName) => {
-    // Crear el contenido HTML que imita la estructura de la página
-    let htmlContent = `
-    <html>
-      <head>
-        <style>
-          body { font-family: 'Arial', sans-serif; }
-          .container { width: 100%; }
-          .header, .footer { margin-bottom: 20px; }
-          table { width: 100%; border-collapse: collapse; }
-          table, th, td { border: 1px solid black; }
-          th, td { padding: 8px; text-align: left; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <!-- Aquí irían los datos del cliente, etc. -->
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <!-- Encabezados de la tabla -->
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Filas de la tabla -->
-            </tbody>
-          </table>
-          <div class="footer">
-            <!-- Aquí irían los datos del pie de página, como el total a pagar, etc. -->
-          </div>
-        </div>
-      </body>
-    </html>`;
+      if (respuestaClienteExistente.ok) {
+        try {
+          const datosCliente = await respuestaClienteExistente.json();
+          clienteExistente = datosCliente != null; // Ahora 'clienteExistente' se puede reasignar sin problemas
+        } catch (error) {
+          // Error al analizar JSON, probablemente porque no hay cuerpo en la respuesta
+          clienteExistente = false;
+        }
+      }
+      console.log(clienteExistente.ok);
+      console.log(respuestaClienteExistente);
+      console.log(valores)
+      
+      if(!clienteExistente){
+        await realizarPeticionConJSON('http://localhost:3001/api/cliente/registrarCliente', {
+            cedula: valores.cedula,
+            nombre: valores.nombre,
+            empresa: valores.empresa,
+            telefono: valores.telefono,
+            email_informe: valores.emailInforme,
+            email_factura: valores.emailFactura,
+            provincia: valores.provincia,
+            canton: valores.canton,
+            distrito: valores.distrito,
+            otras_senas: valores.otrasSenas,
+            cultivo: valores.cultivo,
+            boleta: valores.boleta
+        });
+    }
+
+    const formularioId = await realizarPeticionConJSON('http://localhost:3001/api/formulario/crearFormulario', 
+    { cliente_id: valores.cedula, 
+      recibido_por: valores.recibidoPor,
+      fecha_envio: valores.fechaEnvio, 
+      solicitud_factura: valores.solicitudDeFacturaCredito, 
+      orden_compra: valores.ordenCompra, 
+      costo_analisis: valores.costoAnalisis, 
+      iva: valores.IVA, 
+      total_pagar: valores.totalPagar, 
+      factura_banco: valores.facturaBanco });
+
+     for (const element of valores.tablaDatos) {
+        await realizarPeticionConJSON('http://localhost:3001/api/muestra/crearMuestra', 
+        { codigo_laboratorio: element.codigoLaboratorio,
+          identificacion_campo: element.identificacionCampo,
+          tipo_muestra: element.analisis,
+          formularioId: formularioId.id,
+        });
+    }
+      
+      
+      //const resultado2 = await realizarPeticionConJSON('URL2', { /* datos para URL2 */ });
+      
+      // Continuar con la lógica si todas las peticiones son exitosas
   
-    // Agregar datos reales del objeto 'data' al HTML
-    // ...
-  
-    // Convertir HTML a Blob DOCX y guardar
-    const docx = htmlDocx.asBlob(htmlContent);
-    saveAs(docx, `${fileName}.docx`);
+    } catch (error) {
+      throw error;
+    }
   };
   
+    
+
   return (
     <div className="form-container">
-       <div ref={pdfContentRef}  id='pdf-content'>
+       <div ref={pdfContentRef}  id='contenido-exportar'>
        
        <HeaderTable />
-       <form onSubmit={handleSubmit(onSubmit)}>
+       <form onSubmit={handleSubmit(realizarPeticionesConRollback)}>
           <DatosCliente register={register} setValue={setValue} />
           <BodyTable onDataSubmit={handleDataFromChild}/>
           <FooterTable register={register}/>
@@ -176,11 +167,11 @@ const SampleForm = () => {
        </form>
        
        </div>
-       <button onClick={handlePrint}>Imprimir PDF</button>
-       <button onClick={() => changeStyle("pdf-content", { width: "900px" })}>Exportar a PDF</button>
-       <button onClick={() => exportToExcel(obtenerDatosParaExportar(), "DatosExportados")}>Exportar a Excel</button>
-       <button onClick={() => exportToDoc(obtenerDatosParaExportar(), "Documento")}>Exportar a Word</button>
-       <button onClick={() => exportToImage(pdfContentRef, 'png', 'ImagenExportada')}>Exportar como Imagen</button>
+       <button onClick={ExportarAImpresora}>Imprimir PDF</button>
+       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "PDF")}>Exportar a PDF</button>
+       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "EXCEL")}>Exportar a Excel</button>
+       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "DOCX")}>Exportar a Word</button>
+       <button onClick={() => procesarExportacion("contenido-exportar", { width: "900px" }, "IMG")}>Exportar como Imagen</button>
     </div>
     
   );

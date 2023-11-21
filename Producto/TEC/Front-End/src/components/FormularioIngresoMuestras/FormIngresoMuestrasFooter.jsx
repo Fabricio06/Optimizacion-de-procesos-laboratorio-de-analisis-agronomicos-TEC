@@ -17,7 +17,7 @@ const FooterTable = ({register}) => {
           <div className="form-group">
             <label htmlFor="fechaEnvio">Fecha de Envío:</label>
             <input 
-              type="text" 
+              type="date" 
               id="fechaEnvio" 
               name="fechaEnvio"
               {...register('fechaEnvio')}
@@ -76,7 +76,7 @@ const FooterTable = ({register}) => {
               type="text" 
               id="facturaBanco" 
               name="facturaBanco"
-              {...register('facturaBancp')}
+              {...register('facturaBanco')}
             />
           </div>
         </div>

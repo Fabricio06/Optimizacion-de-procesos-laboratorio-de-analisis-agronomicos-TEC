@@ -24,9 +24,9 @@ export const getMuestraById = async(req, res) => {
 
 export const createMuestra = async (req, res) => {
     try {
-        const { codigo_laboratorio, identificacion_campo, tipo_muestraId, formularioId } = req.body;
-        console.log({ codigo_laboratorio, identificacion_campo, tipo_muestraId, formularioId })
-        const result = await pool.query('INSERT INTO lab.muestras (codigo_laboratorio, identificacion_campo, "tipo_muestraId", "formularioId") VALUES ($1, $2, $3, $4) RETURNING *', [codigo_laboratorio, identificacion_campo, tipo_muestraId, formularioId])
+        const { codigo_laboratorio, identificacion_campo, tipo_muestra, formularioId } = req.body;
+        console.log({ codigo_laboratorio, identificacion_campo, tipo_muestra, formularioId })
+        const result = await pool.query('INSERT INTO lab.muestras (codigo_laboratorio, identificacion_campo, "tipo_muestra", "formularioId") VALUES ($1, $2, $3, $4) RETURNING *', [codigo_laboratorio, identificacion_campo, tipo_muestra, formularioId])
         res.json(result.rows[0]);
     } catch (error) {
         console.error('Error inserting muestra:', error);
@@ -37,8 +37,8 @@ export const createMuestra = async (req, res) => {
 export const updateMuestra = async(req, res) => {
     try {
         const { id } = req.params;
-        const { codigo_laboratorio, identificacion_campo, tipo_muestraId, formularioId } = req.body;
-        await pool.query('UPDATE lab.muestras SET codigo_laboratorio = $1, identificacion_campo = $2, "tipo_muestraId" = $3, "formularioId" = $4 WHERE id = $5', [codigo_laboratorio, identificacion_campo, tipo_muestraId, formularioId, id]);
+        const { codigo_laboratorio, identificacion_campo, tipo_muestra, formularioId } = req.body;
+        await pool.query('UPDATE lab.muestras SET codigo_laboratorio = $1, identificacion_campo = $2, "tipo_muestra" = $3, "formularioId" = $4 WHERE id = $5', [codigo_laboratorio, identificacion_campo, tipo_muestra, formularioId, id]);
         res.json({ message: 'Muestra actualizado exitosamente' });
     } catch (err) {
         console.error(err);
@@ -64,10 +64,10 @@ export const crearMuestrasFormulario = async (req, res) => {
         const { muestras } = req.body;
   
         const insertedMuestras = await Promise.all(muestras.map(async (muestra) => {
-        const { codigo_laboratorio, identificacion_campo, tipo_muestraId } = muestra;
+        const { codigo_laboratorio, identificacion_campo, tipo_muestra } = muestra;
         const result = await pool.query(
-            'INSERT INTO lab.muestras (codigo_laboratorio, identificacion_campo, "tipo_muestraId", "formularioId") VALUES ($1, $2, $3, $4) RETURNING *',
-            [codigo_laboratorio, identificacion_campo, tipo_muestraId, formularioId]
+            'INSERT INTO lab.muestras (codigo_laboratorio, identificacion_campo, "tipo_muestra", "formularioId") VALUES ($1, $2, $3, $4) RETURNING *',
+            [codigo_laboratorio, identificacion_campo, tipo_muestra, formularioId]
         );
         return result.rows[0];
       }));
@@ -90,7 +90,7 @@ export const getMuestrasPorFormulario = async (req, res) => { //Consulta para qu
           tm.nombre AS tipo_muestra
         FROM lab.formulario fc
         JOIN lab.muestras m ON fc.id = m."formularioId"
-        JOIN lab.tipo_muestras tm ON m."tipo_muestraId" = tm.id
+        JOIN lab.tipo_muestras tm ON m."tipo_muestra" = tm.id
         WHERE fc.id = $1;
       `;
       const { rows } = await pool.query(consultaSQL, [id]);

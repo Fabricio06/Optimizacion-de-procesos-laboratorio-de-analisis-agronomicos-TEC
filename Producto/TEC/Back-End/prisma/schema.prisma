@@ -45,8 +45,16 @@ model persona_cliente{
 
 model formulario{
   id            Int @id @default(autoincrement())
-  persona_cliente persona_cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
-  clienteId     Int
+  persona_cliente persona_cliente @relation(fields: [cliente_id], references: [cedula], onDelete: Cascade)
+  cliente_id     Int
+  recibido_por  String
+  fecha_envio   DateTime
+  solicitud_factura String
+  orden_compra  String
+  costo_analisis Int
+  iva           Int
+  total_pagar    Int
+  factura_banco  String
   muestras muestras[]
 }
 
@@ -56,12 +64,5 @@ model muestras{
   identificacion_campo String
   formulario formulario @relation(fields: [formularioId], references: [id], onDelete: Cascade)
   formularioId    Int
-  tipo_muestras tipo_muestras @relation(fields: [tipo_muestraId], references: [id])
-  tipo_muestraId Int
-}
-
-model tipo_muestras{
-  id        Int @id @default(autoincrement())
-  nombre    String @unique
-  muestras muestras []
+  tipo_muestra String
 }
