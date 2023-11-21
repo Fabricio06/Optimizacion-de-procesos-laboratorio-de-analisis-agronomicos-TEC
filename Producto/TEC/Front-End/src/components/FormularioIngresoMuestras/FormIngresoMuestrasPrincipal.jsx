@@ -44,7 +44,7 @@ const SampleForm = () => {
       setValue('ordenCompra', formulario.orden_compra);
       setValue('nombre', formulario.nombre);
       setValue('empresa', formulario.empresa);
-      setValue('telefono', formulario.telefono);
+      setValue('telefono', formulario.telefono_empresa);
       setValue('emailInforme', formulario.email_informe);
       setValue('emailFactura', formulario.email_factura);
       setValue('provincia', formulario.provincia);
@@ -55,6 +55,9 @@ const SampleForm = () => {
       setValue('cultivo', formulario.cultivo);
       setValue('boleta', formulario.boleta);
       setValue('fecha', obtenerFechaFormateada());
+
+
+        
     }
 }, [formulario, setValue]);
 

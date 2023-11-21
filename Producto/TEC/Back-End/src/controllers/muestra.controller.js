@@ -87,10 +87,9 @@ export const getMuestrasPorFormulario = async (req, res) => { //Consulta para qu
           m.id AS muestra_id,
           m.codigo_laboratorio AS codigo_laboratorio,
           m.identificacion_campo AS identificacion_campo,
-          tm.nombre AS tipo_muestra
+          m.tipo_muestra AS tipo_muestra
         FROM lab.formulario fc
         JOIN lab.muestras m ON fc.id = m."formularioId"
-        JOIN lab.tipo_muestras tm ON m."tipo_muestra" = tm.id
         WHERE fc.id = $1;
       `;
       const { rows } = await pool.query(consultaSQL, [id]);
