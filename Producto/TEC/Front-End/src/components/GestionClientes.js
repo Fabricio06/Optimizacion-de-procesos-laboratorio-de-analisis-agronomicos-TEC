@@ -32,14 +32,14 @@ const GestionClientes = () =>{
                     <img src={Icono1}/>
                 </div>
                 <div className='option2'>
-                    <h3>Editar o eliminar clientes</h3>
-                    <p>Edite o elimine datos aquí</p>
+                    <h3>Editar clientes</h3>
+                    <p>Edite datos de los clientes</p>
                     <p>Ingrese <strong> <a href='/eliminarEditarClientes'>aquí</a></strong></p>
                     <img src={Icono2}/>
                 </div>
                 <div className='option2'>
                     <h3>Historial de clientes</h3>
-                    <p>Verifique el historial de clientes</p>
+                    <p>Verifique el historial de clientes y elimine si es necesario</p>
                     <p>Ingrese <strong><a href='/historialClientes'>aquí</a></strong></p>
                     <img src={Icono3}/>
                 </div>
