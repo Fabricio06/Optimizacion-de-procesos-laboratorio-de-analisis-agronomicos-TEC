@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AutenticacioRequerida';
 
 const Login = () => {
-
+    const navigate = useNavigate();
+    const { login } = useAuth(); // Utilizar useAuth
     const [usuario, setUsuario] = useState('');
     const [contrasena, setContrasena] = useState('');
 
@@ -10,7 +13,7 @@ const Login = () => {
         e.preventDefault();
 
         if (!usuario || !contrasena) {
-            console.log('Por favor, completa ambos campos.');
+            console.log('Por favor, completa los espacios de campos.');
             return;
         }
 
@@ -19,10 +22,10 @@ const Login = () => {
                 usuario,
                 contrasena
             });
-
+            console.log(response)
             if (response.data.validado) {
-                // Redirige al usuario a la página de la aplicación.
-                window.location.href = '/App';
+                login({ usuario }); // Actualizar estado de autenticación
+                navigate('/App');
             } else {
                 console.log('Credenciales incorrectas');
             }
@@ -30,6 +33,7 @@ const Login = () => {
             console.log(e);
         }
     }
+
 
     return(
         <div className='container'>
@@ -49,7 +53,7 @@ const Login = () => {
                             </div>
                             
                             <div className='input-container'>
-                            <button type="submit" onClick={submit}><a href='/App'>Iniciar Sesión</a></button>
+                            <button type="submit" onClick={submit}><a href='../App'>Iniciar Sesión</a></button>
                             </div>
                         </form>
                         <div className='input-container'>

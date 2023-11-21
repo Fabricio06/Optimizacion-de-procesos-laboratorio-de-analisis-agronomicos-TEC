@@ -1,28 +1,29 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-
+import { useAuth } from './AutenticacioRequerida';
+import { useNavigate } from 'react-router-dom';
 const Registro = () => {
-    
+    const navigate = useNavigate();
     const [usuario, setUsuario] = useState('');
     const [primerApellido, setprimerApellido] = useState('');
     const [segundoApellido, setsegundoApellido] = useState('');
     const [correo, setcorreo] = useState('');
     const [contrasena, setContrasena] = useState('');
+    const { login } = useAuth();
 
     async function submit(e) {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3001/register", {
+            const response = await axios.post("http://localhost:3001/api/user/register", {
                 usuario,
                 contrasena,
                 correo,
                 primerApellido,
                 segundoApellido
             });
-
-            if (response.data.validado) {
-                // Redirige al usuario a la página de la aplicación.
-                window.location.href = '/App';
+            if (response.data.registrado) {
+                login({ usuario }); // Actualizar estado de autenticación
+                navigate('/App');;
             } else {
                 console.log('Credenciales incorrectas');
             }
@@ -64,7 +65,7 @@ const Registro = () => {
                             </div>
 
                             <div className='input-container'>
-                            <button type="submit" onClick={submit}><a href='/'>Regístrate</a></button>
+                            <button style={{color:'white'}} type="submit" onClick={submit}>Regístrate</button>
                             </div>
                         </form>
                     </div>

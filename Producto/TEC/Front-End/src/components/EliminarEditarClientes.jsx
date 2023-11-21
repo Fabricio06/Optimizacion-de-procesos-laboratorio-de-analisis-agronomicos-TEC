@@ -2,6 +2,7 @@ import Menu from './Menu';
 import DatosClientes from './DatosClientes';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const EliminarEditarClientes = () =>{
 

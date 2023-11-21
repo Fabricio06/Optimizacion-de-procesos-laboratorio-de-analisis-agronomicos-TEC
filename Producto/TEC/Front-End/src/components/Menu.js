@@ -7,7 +7,7 @@ const Menu = () => {
         <div className='Menu'>
             <div className='nav-logo'><a className= 'logo' href="/App">Laboratorio de Análisis <strong>Agronómicos</strong></a></div>
             <div className={`nav_items ${isOpen && "open"}`}>
-                <a href="/">Inicio</a>
+                <a href="/">Salir</a>
                 <a href="/FormularioIngresoMuestras">Formularios</a>
                 <a href="/perfilUsuario">Accede al perfil</a>
             
