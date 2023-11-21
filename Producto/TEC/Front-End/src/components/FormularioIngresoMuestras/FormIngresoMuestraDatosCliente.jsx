@@ -35,7 +35,21 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
         navigate('/seleccionar-cliente');
     };
 
-
+    function ClearCliente (){
+    
+        setValue('nombre', "");
+        setValue('empresa', "");
+        setValue('telefono', "");
+        setValue('emailInforme', "");
+        setValue('emailFactura', "");
+        setValue('provincia', "");
+        setValue('canton', "");
+        setValue('distrito', "");  
+        setValue('otrasSenas', "");
+        setValue('cedula', "");
+        setValue('cultivo', "");
+        setValue('boleta', "");
+        }
     return (  
         <div className='FormIngresoMuestraDatosCliente'>
             <form>
@@ -208,6 +222,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                 </div>
             </form>
             <button type='button' onClick={handleVincularCliente}>Vincular cliente</button>
+            <button type='button' onClick={ClearCliente}>Limpiar espacios</button>
 
 
             <hr className='line-below-div' />
