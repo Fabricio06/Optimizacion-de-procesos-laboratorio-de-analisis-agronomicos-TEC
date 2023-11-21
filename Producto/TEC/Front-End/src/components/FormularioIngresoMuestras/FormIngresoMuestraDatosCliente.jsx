@@ -61,8 +61,7 @@ const FormIngresoMuestraDatosCliente = ({ register,setValue }) => {
                             type="text"
                             id="cliente"
                             name="cliente"
-                            {...register('nombre')}
-                        />
+                            {...register('nombre')}/>
                     </div>
 
                     {/* Fecha */}

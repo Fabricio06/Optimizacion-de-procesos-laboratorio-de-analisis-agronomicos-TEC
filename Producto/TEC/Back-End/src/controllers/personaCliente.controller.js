@@ -126,7 +126,7 @@ export const updatePersonaCliente = async(req, res) => {
     try {
         const { id } = req.params;
         const { cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
-        await pool.query('UPDATE lab.persona_cliente SET ccedula = $1, nombre = $2, empresa = $3, telefono = $4, email_informe = $5, email_factura = $6, provincia = $7, canton = $8, distrito = $9, otras_senas = $10, cultivo = $11, boleta = $12 WHERE id = $13', [cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta, id]);
+        await pool.query('UPDATE lab.persona_cliente SET cedula = $1, nombre = $2, empresa = $3, telefono = $4, email_informe = $5, email_factura = $6, provincia = $7, canton = $8, distrito = $9, otras_senas = $10, cultivo = $11, boleta = $12 WHERE id = $13', [cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta, id]);
         res.json({ message: 'Tecnico actualizado exitosamente' });
     } catch (err) {
         console.error(err);
