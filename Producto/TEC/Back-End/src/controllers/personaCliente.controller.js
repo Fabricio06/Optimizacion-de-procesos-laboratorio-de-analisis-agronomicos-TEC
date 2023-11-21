@@ -40,7 +40,14 @@ export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que 
       let consultaSQL = `
         SELECT
           fc.id AS formulario_id,
-          fc."clienteId" AS cliente_id,
+          fc.orden_compra AS orden_compra,
+          fc.recibido_por AS recibido_por,
+          fc.fecha_envio AS fecha_envio,
+          fc.solicitud_factura AS solicitud_factura,
+          fc.costo_analisis AS costo_de_analisis,
+          fc.iva AS iva,
+          fc.total_pagar AS total_a_pagar,
+          fc.factura_banco AS factura_de_banco,
           pc.nombre AS nombre,
           pc.cedula AS cedula,
           pc.empresa AS nombre_empresa,
@@ -54,7 +61,7 @@ export const getFormulariosPorFiltro= async (req, res) => { //Consulta para que 
           pc.cultivo AS cultivo,
           pc.boleta AS boleta
         FROM lab.formulario fc
-        JOIN lab.persona_cliente pc ON fc."clienteId" = pc.id
+        JOIN lab.persona_cliente pc ON fc."cliente_id" = pc.cedula
         WHERE 1=1
       `;
       const params = [];
@@ -118,8 +125,8 @@ export const createPersonaCliente = async(req, res) => {
 export const updatePersonaCliente = async(req, res) => {
     try {
         const { id } = req.params;
-        const { correoInstitucional, nombre, apellido1, apellido2, autenticarId } = req.body;
-        await pool.query('UPDATE lab.persona_cliente SET correoInstitucional = $1, nombre = $2, apellido1 = $3, apellido2 = $4, "autenticarId" = $5 WHERE id = $6', [correoInstitucional, nombre, apellido1, apellido2, autenticarId, id]);
+        const { cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
+        await pool.query('UPDATE lab.persona_cliente SET cedula = $1, nombre = $2, empresa = $3, telefono = $4, email_informe = $5, email_factura = $6, provincia = $7, canton = $8, distrito = $9, otras_senas = $10, cultivo = $11, boleta = $12 WHERE id = $13', [cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta, id]);
         res.json({ message: 'Tecnico actualizado exitosamente' });
     } catch (err) {
         console.error(err);
@@ -127,6 +134,7 @@ export const updatePersonaCliente = async(req, res) => {
     }
 }
 
+//http://localhost:3001/api/cliente/(Aquí pone el id del que quiera eliminar)
 export const deletePersonaCliente = async(req, res) => { //Delete on cascade
     try {
         const { id } = req.params;

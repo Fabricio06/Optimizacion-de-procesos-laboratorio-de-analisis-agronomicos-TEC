@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     element: <RegistroClientes/>,
   },
   {
-    path: "eliminarEditarClientes",
+    path: "eliminarEditarClientes/:id",
     element: <EliminarEditarClientes/>,
   },
   {

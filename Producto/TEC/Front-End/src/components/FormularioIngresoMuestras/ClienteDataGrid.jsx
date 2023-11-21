@@ -54,6 +54,7 @@
             ),
             flex: 1,
         },
+        
         ];
 
         const filtrarClientes = () => {

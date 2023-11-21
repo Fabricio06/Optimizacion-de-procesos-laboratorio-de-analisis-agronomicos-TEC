@@ -762,7 +762,6 @@ Body{
 .historialclientes .contenedor .gridInformacion{
   margin-top: 2%;
   justify-content: center;
-  margin-left: 2%;
   
 }
 
@@ -974,6 +973,19 @@ border: 1px solid transparent;
   padding: 10px;
   margin-left: 70px;
   margin-top: 40px;
+}
+
+.historialclientes .botones{
+  margin-top: 100px;
+	background: #2B4e62;
+	color: #fff;
+	border:2px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+  margin: 5px;
+  font-size: 20px;
+  padding: 10px;
 }
 
 

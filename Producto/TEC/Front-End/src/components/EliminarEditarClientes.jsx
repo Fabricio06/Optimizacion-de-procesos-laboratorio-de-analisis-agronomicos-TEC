@@ -1,8 +1,85 @@
-import React from 'react';
 import Menu from './Menu';
 import DatosClientes from './DatosClientes';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const EliminarEditarClientes = () =>{
+
+    const  API_URL = 'http://localhost:3001/api/cliente'
+
+    const { id: clienteId } = useParams();
+
+    const [formData, setFormData] = useState({
+    cedula: '',
+    nombre: '',
+    empresa: '',
+    telefono: '',
+    email_informe: '',
+    email_factura: '',
+    provincia: '',
+    canton: '',
+    distrito: '',
+    otras_senas: '',
+    cultivo: '',
+    boleta: '',
+
+    });
+
+    useEffect(() => {
+      fetch(`http://localhost:3001/api/cliente/${clienteId}`)
+        .then(response => response.json())
+        .then(data => {
+          // Realiza una verificación de los datos recibidos antes de actualizar el estado
+          if (data) {
+            // Actualiza el estado formData con los valores del cliente encontrados
+            setFormData({
+              cedula: data.cedula || '',
+              nombre: data.nombre || '',
+              empresa: data.empresa || '',
+              telefono: data.telefono || '',
+              email_informe: data.email_informe || '',
+              email_factura: data.email_factura || '',
+              provincia: data.provincia || '',
+              canton: data.canton || '',
+              distrito: data.distrito || '',
+              otras_senas: data.otras_senas || '',
+              cultivo: data.cultivo || '',
+              boleta: data.boleta || ''
+            });
+          }
+        })
+        .catch(error => console.error('Error al obtener datos del cliente:', error));
+    }, [clienteId]);
+    
+      
+    
+      const enviarDatos = async () => {
+        try {
+          // Resto del código para enviar datos actualizados
+          const response = await fetch(`${API_URL}/${clienteId}`, {
+            method: 'PUT', // Usar el método PUT para actualizar la factura existente
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+        } catch (error) {
+          console.error('Error en la solicitud:', error);
+        }
+      };
+    
+      const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+          ...setFormData,
+          [name]: value
+        });
+        
+      };
+    
+      
+    
+
     return(
     <div className='eliminareditarclientes'>
         <header>
@@ -10,17 +87,66 @@ const EliminarEditarClientes = () =>{
         </header>
         <div className='contenedor'>
                 <div className='titulo'>
-                    <h2>Eliminación o edición de clientes</h2>
+                    <h2>Edición de clientes</h2>
                 </div>
-                <div className='encabezado'>
-                    <label htmlFor="cedulaBuscar">Cedula:</label>
-                    <input type="text" />
-                    <button className='boton'>Filtrar</button>
+                <div className='datosClientes'>
+                <form action="">
+                <ul id='formulario'>
+                    <li>
+                        <label htmlFor="nombre">Nombre:</label>
+                        <input type="text" id="nombre" className="estilosInput" name="nombre" value={formData.nombre} onChange={handleInputChange} />
+                    </li>
+                    <li>
+                        <label htmlFor="cedula">Cedula:</label>
+                        <input type="number" id='cedula'  name='cedula' value={formData.cedula} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="empresa">Empresa:</label>
+                        <input type="text" id='empresa'  name='empresa' value={formData.empresa} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="telefono">Telefono:</label>
+                        <input type="number" id='telefono'  name='telefono' value={formData.telefono} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="email_informe">Email Informe:</label>
+                        <input type="email" id='email_informe'  name='email_informe' value={formData.email_informe} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="email_factura">Email Factura:</label>
+                        <input type="email" id='email_factura'  name='email_factura' value={formData.email_factura} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="provincia">Provincia:</label>
+                        <input type="text" id='provincia'  name='provincia' value={formData.provincia} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="canton">Canton:</label>
+                        <input type="text" id='canton'  name='canton' value={formData.canton} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="distrito">Distrito:</label>
+                        <input type="text" id='distrito'  name='distrito' value={formData.distrito} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="otras_senas">Otras Señas:</label>
+                        <input type="text" id='otras_senas'  name='otras_senas' value={formData.otras_senas} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="cultivo">Cultivo:</label>
+                        <input type="text" id='cultivo'  name='cultivo' value={formData.cultivo} onChange={handleInputChange}/>
+                    </li>
+                    <li>
+                        <label htmlFor="boleta">Boleta:</label>
+                        <input type="text" id='boleta'  name='boleta' value={formData.boleta} onChange={handleInputChange}/>
+                    </li>
+                </ul>
+                
+            </form>
                 </div>
-                <DatosClientes/>
+                
                 <div className='botones'>
-                    <button className='boton'>Eliminar cliente</button>
-                    <button className='boton'>Aplicar cambios</button>
+                    <button onClick={enviarDatos}>Aplicar cambios</button>
                 </div>
         </div>
 
