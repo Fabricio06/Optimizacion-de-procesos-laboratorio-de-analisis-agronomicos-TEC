@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
-import Login from './components/Login';
-import Registro from './components/Registro';
+import Login from './components/Autenticacion/Login.js';
+import Registro from './components/Autenticacion/Registro';
 import GestionClientes from './components/GestionClientes';
 import RegistroClientes from './components/RegistroClientes';
 import EliminarEditarClientes from './components/EliminarEditarClientes';
@@ -12,6 +12,10 @@ import PerfilUsuario from './components/PerfilUsuario';
 import FormularioIngresoMuestras from './components/FormularioIngresoMuestras/FormIngresoMuestrasPrincipal';
 import HistorialClientes from './components/HistorialClientes';
 import ClienteSelectorPage from './components/FormularioIngresoMuestras/ClienteDataGrid';
+import { AuthProvider } from './components/Autenticacion/AutenticacioRequerida';
+import ProtectedRoute from './components/Autenticacion/ProtectedRoute';
+
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -26,7 +30,9 @@ const router = createBrowserRouter([
   },
   {
     path: "App", //Recordar aplicar Require Login aquí
-    element: <App/>,
+    element: (
+      <App/>
+  ),
   },
   {
     path: "registro",
@@ -70,5 +76,7 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <RouterProvider router={router}/>
+  <AuthProvider>
+      <RouterProvider router={router}/>
+  </AuthProvider>
 );

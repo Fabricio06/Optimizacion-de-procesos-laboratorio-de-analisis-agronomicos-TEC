@@ -1,5 +1,7 @@
 import React, { useEffect} from 'react';
 
+
+
 const FooterTable = ({register}) => {
 
   return (
@@ -50,7 +52,7 @@ const FooterTable = ({register}) => {
               type="number" 
               id="costoAnalisis" 
               name="costoAnalisis"
-              {...register('costoAnalisis',{required:'Se requiere este espacio', minLength: 8, maxLength: 9})} 
+              {...register('costoAnalisis',{required:'Se requiere este espacio',  maxLength: 9})} 
             />
           </div>
           <div className="form-group">
@@ -59,7 +61,7 @@ const FooterTable = ({register}) => {
               type="number" 
               id="iva" 
               name="iva"
-              {...register('IVA',{required:'Se requiere este espacio', minLength: 8, maxLength: 9})} 
+              {...register('IVA',{required:'Se requiere este espacio',  maxLength: 9})} 
             />
           </div>
           <div className="form-group">
@@ -68,7 +70,7 @@ const FooterTable = ({register}) => {
               type="number" 
               id="totalPagar" 
               name="totalPagar"
-              {...register('totalPagar',{required:'Se requiere este espacio', minLength: 8, maxLength: 9})}
+              {...register('totalPagar',{required:'Se requiere este espacio',  maxLength: 9})}
             />
           </div>
           <div className="form-group">

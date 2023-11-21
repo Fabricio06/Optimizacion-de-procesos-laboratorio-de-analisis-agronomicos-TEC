@@ -46,7 +46,9 @@ app.post('/login', async (req, res) => {
     const { usuario, contrasena } = req.body;
     try {
         const result = await pool.query(`SELECT * FROM lab.autenticar AS au JOIN lab.persona_tecnico AS pt ON au."tecnicoId" = pt.id WHERE pt.nombre = $1`, [usuario]);
+
         if (result.rows.length > 0) {
+
             const user = result.rows[0];
             const validPassword = await bcrypt.compare(contrasena, user.contrasena);
             if (validPassword) {
@@ -60,18 +62,6 @@ app.post('/login', async (req, res) => {
     } catch (error) {
         console.error('Error en inicio de sesión:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
-
-app.post('/register', async (req, res) => {
-    try{
-    const values = req.body;
-    console.log(values['contrasena'])
-    const result = await pool.query(`INSERT INTO lab.autenticar(contrasena) VALUES ('${values['contrasena']}'); INSERT INTO lab.persona_tecnico ("correoInstitucional", nombre, apellido1, apellido2, "autenticarId") VALUES('${values['correo']}','${values['usuario']}','${values['primerApellido']}', '${values['segundoApellido']}', '3')`);
-    res.json({ validado: true });     
-    }catch(e){
-        console.log(e)
-        res.json({ validado: false }); 
     }
 });
 

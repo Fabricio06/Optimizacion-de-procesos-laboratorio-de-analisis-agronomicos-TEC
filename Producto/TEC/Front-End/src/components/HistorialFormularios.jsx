@@ -45,7 +45,10 @@ const HistorialFormularios = () =>{
             navigate(`/eliminarEditarClientes/${clienteid}`, { state: { id: clienteid } });
         };
 
-    
+
+        const handleVisualizarFormulario = (formulario) => {
+            navigate(`/FormularioIngresoMuestras`, { state: { formulario } });
+        };
 
         // Código en tu componente React para eliminar formulario
         const handleEliminarFormulario = async (id)=> {
@@ -84,6 +87,17 @@ const HistorialFormularios = () =>{
             renderCell: (params) => (
                 <button onClick={() => handleEliminarFormulario(params.row.formulario_id)}>
                     Eliminar
+                </button>
+            ),
+            width: 120,
+        },
+        {
+            field: 'visualizar',
+            headerName: 'Visualizar',
+            sortable: false,
+            renderCell: (params) => (
+                <button onClick={() => handleVisualizarFormulario(params.row)}>
+                    Visualizar
                 </button>
             ),
             width: 120,

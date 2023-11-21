@@ -1,4 +1,4 @@
-import React, { useRef} from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import { useForm} from 'react-hook-form';
 import './FormIngresoMuestras.css';
 import HeaderTable from './FormIngresoMuestraTablaH';
@@ -10,8 +10,12 @@ import { useReactToPrint } from 'react-to-print';
 
 import { exportarAPDF, exportarAImagen, exportarAExcel, 
         exportarADocx } from '../../functions/exports/exportaciones_de_archivos';
-
+import { useLocation } from 'react-router-dom';
+import { obtenerFechaFormateada } from '../../functions/manejo_de_fechas';
 const SampleForm = () => {  
+  const [formularioDatos, setFormularioDatos] = useState(null);
+  const location = useLocation();
+  const formulario = location.state?.formulario;
   const navigate = useNavigate();
   const pdfContentRef = useRef(null);
   const { register, handleSubmit, setValue , getValues,  formState: { errors }} = useForm();
@@ -24,7 +28,36 @@ const SampleForm = () => {
   const handlePrint = useReactToPrint({
     content: () => pdfContentRef.current,
   });
-  
+
+  useEffect(() => {
+    if (formulario) {
+      console.log(formulario)
+      ocultarElementos()
+      setValue('recibidoPor', formulario.recibido_por);
+      setValue('fechaEnvio', obtenerFechaFormateada(formulario.fecha_envio));
+      setValue('solicitudDeFacturaCredito', formulario.solicitud_factura);
+      setValue('ordenCompra', formulario.orden_compra);
+      setValue('costoAnalisis', formulario.costo_analisis);
+      setValue('IVA', formulario.iva);
+      setValue('totalPagar', formulario.total_pagar);
+      setValue('facturaBanco', formulario.factura_banco);
+      setValue('ordenCompra', formulario.orden_compra);
+      setValue('nombre', formulario.nombre);
+      setValue('empresa', formulario.empresa);
+      setValue('telefono', formulario.telefono);
+      setValue('emailInforme', formulario.email_informe);
+      setValue('emailFactura', formulario.email_factura);
+      setValue('provincia', formulario.provincia);
+      setValue('canton', formulario.canton);
+      setValue('distrito', formulario.distrito);  
+      setValue('otrasSenas', formulario.otras_senas);
+      setValue('cedula', formulario.cedula);
+      setValue('cultivo', formulario.cultivo);
+      setValue('boleta', formulario.boleta);
+      setValue('fecha', obtenerFechaFormateada());
+    }
+}, [formulario, setValue]);
+
 
   function procesarExportacion(elementId, newStyles, tipoExportacion) {
     const element = document.getElementById(elementId);
@@ -154,6 +187,8 @@ const SampleForm = () => {
           formularioId: formularioId.id,
         });
     }
+    alert('Guardado Correctamente');
+    volver();
       
     } catch (error) {
       throw error;
@@ -231,7 +266,6 @@ const SampleForm = () => {
     
 
 
-
   };
   
 
@@ -243,7 +277,7 @@ const SampleForm = () => {
        <form onSubmit={handleSubmit(realizarPeticionesConRollback)}>
           <DatosCliente register={register} setValue={setValue}  />
           <BodyTable onDataSubmit={handleDataFromChild}/>
-          <FooterTable register={register}/>
+          <FooterTable register={register} />
       {/* Submit Button */}
         <div className='form-botton-container'>
           <button id='guardar-boton'  className='botonClientes' type="submit">Guardar</button>
