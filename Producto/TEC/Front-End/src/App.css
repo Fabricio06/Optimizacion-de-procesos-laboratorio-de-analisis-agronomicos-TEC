@@ -162,14 +162,19 @@ color: #2B4e62;
     width: 250px;
     height: 250px;
     padding: 2em 1.5em;
-    
     border-radius: 5px;
     cursor: pointer;
     background-color: #2B4e62;
     background-image: url(../src/images/fondo1.png);
     background-size: cover;
     position: relative;
+    transition: transform 0.5s; 
 }
+
+.option:hover {
+  transform: scale(1.05);
+}
+
 
 .option h3{
   color: #fff;
@@ -421,6 +426,10 @@ Body{
   padding: 15px;
   font-weight: lighter;
 
+}
+
+.Menu a:hover{
+  color: gray;
 }
 
 @media (max-width: 768px){

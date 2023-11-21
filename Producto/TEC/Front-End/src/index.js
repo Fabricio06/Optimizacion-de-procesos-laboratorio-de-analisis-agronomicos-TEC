@@ -16,6 +16,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import HistorialFormularios from './components/HistorialFormularios';
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,9 @@ const router = createBrowserRouter([
   },{ 
     path: "/seleccionar-cliente",
     element: <ClienteSelectorPage/>
+  },{ 
+    path: "/historialFormularios",
+    element: <HistorialFormularios/>
   }
 
 ]);

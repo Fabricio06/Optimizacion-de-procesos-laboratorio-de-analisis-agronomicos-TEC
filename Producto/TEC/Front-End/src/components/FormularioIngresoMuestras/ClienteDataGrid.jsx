@@ -8,6 +8,7 @@
         const [clientes, setClientes] = useState([]);
         const [filtroNombre, setFiltroNombre] = useState('');
         const [filtroCedula, setFiltroCedula] = useState('');
+        const [filtroEmail, setFiltroEmail] = useState('');
         const navigate = useNavigate();
         
         //Traductor del componente a español
@@ -37,9 +38,11 @@
         };
 
         const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        { field: 'nombre', headerName: 'Nombre', width: 150 },
-        { field: 'cedula', headerName: 'Nombre', width: 150 },
+        { field: 'id', headerName: 'ID', flex: 0.5 },
+        { field: 'nombre', headerName: 'Nombre', flex: 1.5 },
+        { field: 'cedula', headerName: 'Cedula', flex: 1 },
+        { field: 'empresa', headerName: 'Empresa', flex: 1},
+        { field: 'email_factura', headerName: 'Email Factura', flex: 1.5},
         {
             field: 'seleccionar',
             headerName: 'Seleccionar',
@@ -49,7 +52,7 @@
                 Seleccionar
             </button>
             ),
-            width: 160,
+            flex: 1,
         },
         
         ];
@@ -57,13 +60,14 @@
         const filtrarClientes = () => {
             return clientes.filter(cliente => {
                 const nombreCoincide = cliente.nombre.toLowerCase().includes(filtroNombre.toLowerCase());
+                const emailCoincide = cliente.email_factura.toLowerCase().includes(filtroEmail.toLowerCase());
                 let cedulaCoincide = false;
         
                 if (cliente.cedula) {
                     cedulaCoincide = cliente.cedula.toString().toLowerCase().includes(filtroCedula.toLowerCase());
                 }
         
-                return nombreCoincide && cedulaCoincide;
+                return nombreCoincide && cedulaCoincide && emailCoincide;
             });
         };
         
@@ -73,7 +77,7 @@
         return (
             <div className='ClientesSelectorPage'>
                 <ThemeProvider theme={tema}>
-                    <div style={{ margin: '10px 0' }}>
+                    <div className='filtros-datagrid' style={{ margin: '10px 0' }}>
                         <p>Filtrar por nombre</p>
                         <input
                             type="text"
@@ -88,6 +92,13 @@
                             onChange={(e) => setFiltroCedula(e.target.value)}
                             placeholder="Filtrar por cédula"
                         />
+                        <p>Filtrar por email</p>
+                        <input
+                            type="text"
+                            value={filtroEmail}
+                            onChange={(e) => setFiltroEmail(e.target.value)}
+                            placeholder="Filtrar por email"
+                        />
                     </div>
                     <div style={{ 'min-height': '100vh', width: '100%' }}>
                         <DataGrid
@@ -97,7 +108,7 @@
                             rowsPerPageOptions={[5, 10, 20]}
                             checkboxSelection
                         />
-                    </div>
+                </div>
                 </ThemeProvider>
             </div>
         );
