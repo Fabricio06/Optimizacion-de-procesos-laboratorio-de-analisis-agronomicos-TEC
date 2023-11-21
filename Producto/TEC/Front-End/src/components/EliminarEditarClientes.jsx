@@ -26,29 +26,15 @@ const EliminarEditarClientes = () =>{
     });
 
     useEffect(() => {
+      // Realiza la solicitud a la API para obtener la factura según el ID
       fetch(`http://localhost:3001/api/cliente/${clienteId}`)
         .then(response => response.json())
         .then(data => {
-          // Realiza una verificación de los datos recibidos antes de actualizar el estado
-          if (data) {
-            // Actualiza el estado formData con los valores del cliente encontrados
-            setFormData({
-              cedula: data.cedula || '',
-              nombre: data.nombre || '',
-              empresa: data.empresa || '',
-              telefono: data.telefono || '',
-              email_informe: data.email_informe || '',
-              email_factura: data.email_factura || '',
-              provincia: data.provincia || '',
-              canton: data.canton || '',
-              distrito: data.distrito || '',
-              otras_senas: data.otras_senas || '',
-              cultivo: data.cultivo || '',
-              boleta: data.boleta || ''
-            });
-          }
+          // Actualiza el estado formData con los valores de la factura encontrada
+          
+          setFormData(data);
         })
-        .catch(error => console.error('Error al obtener datos del cliente:', error));
+        .catch(error => console.error('Error al obtener datos de la factura:', error));
     }, [clienteId]);
     
       
@@ -71,10 +57,9 @@ const EliminarEditarClientes = () =>{
       const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({
-          ...setFormData,
+          ...formData,
           [name]: value
         });
-        
       };
     
       
