@@ -125,8 +125,8 @@ export const createPersonaCliente = async(req, res) => {
 export const updatePersonaCliente = async(req, res) => {
     try {
         const { id } = req.params;
-        const { correoInstitucional, nombre, apellido1, apellido2, autenticarId } = req.body;
-        await pool.query('UPDATE lab.persona_cliente SET correoInstitucional = $1, nombre = $2, apellido1 = $3, apellido2 = $4, "autenticarId" = $5 WHERE id = $6', [correoInstitucional, nombre, apellido1, apellido2, autenticarId, id]);
+        const { cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta } = req.body;
+        await pool.query('UPDATE lab.persona_cliente SET ccedula = $1, nombre = $2, empresa = $3, telefono = $4, email_informe = $5, email_factura = $6, provincia = $7, canton = $8, distrito = $9, otras_senas = $10, cultivo = $11, boleta = $12 WHERE id = $13', [cedula, nombre, empresa, telefono, email_informe, email_factura, provincia, canton, distrito, otras_senas, cultivo, boleta, id]);
         res.json({ message: 'Tecnico actualizado exitosamente' });
     } catch (err) {
         console.error(err);
@@ -134,6 +134,7 @@ export const updatePersonaCliente = async(req, res) => {
     }
 }
 
+//http://localhost:3001/api/cliente/(Aquí pone el id del que quiera eliminar)
 export const deletePersonaCliente = async(req, res) => { //Delete on cascade
     try {
         const { id } = req.params;
