@@ -46,7 +46,18 @@ const HistorialFormularios = () =>{
         };
 
 
-        const handleVisualizarFormulario = (formulario) => {
+        const handleVisualizarFormulario = async (formulario) => {
+            try {
+                const response = await fetch(`http://localhost:3001/api/muestra/obtenerMuestrasPorFormulario/${formulario.formulario_id}`, {
+                    method: 'GET',
+                });
+                const data = await response.json();
+                formulario['muestras'] =data;
+                console.log(data); // Manejar la respuesta de la eliminación en el front-end
+                } catch (error) {
+                console.error(error)
+                }
+            console.log(formulario)
             navigate(`/FormularioIngresoMuestras`, { state: { formulario } });
         };
 
