@@ -96,7 +96,7 @@ const HistorialFormularios = () =>{
             headerName: 'Eliminar',
             sortable: false,
             renderCell: (params) => (
-                <button onClick={() => handleEliminarFormulario(params.row.formulario_id)}>
+                <button className='button_datagrid' onClick={() => handleEliminarFormulario(params.row.formulario_id)}>
                     Eliminar
                 </button>
             ),
@@ -107,7 +107,7 @@ const HistorialFormularios = () =>{
             headerName: 'Visualizar',
             sortable: false,
             renderCell: (params) => (
-                <button onClick={() => handleVisualizarFormulario(params.row)}>
+                <button className='button_datagrid' onClick={() => handleVisualizarFormulario(params.row)}>
                     Visualizar
                 </button>
             ),

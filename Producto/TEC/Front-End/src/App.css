@@ -169,6 +169,7 @@ color: #2B4e62;
     background-size: cover;
     position: relative;
     transition: transform 0.5s; 
+
 }
 
 .option:hover {
@@ -274,6 +275,9 @@ section#inicio .img-cover2{
   line-height: 2;
   color: #fff;
 }
+#inicio .txt-intro2 p{
+  font-size: 20px;
+}
 
 .main-container{
   max-width: 1000px;
@@ -283,7 +287,7 @@ section#inicio .img-cover2{
 }
 
 .main-title{
-  font-size: 25px;
+  font-size: 40px;
   font-weight: bold;
 }
 
@@ -527,6 +531,27 @@ Body{
   background-color: #BBD6E6;
 }
 
+.eliminareditarclientes #formulario{
+
+  padding: 30px;
+}
+
+.eliminareditarclientes #formulario li{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+}   
+
+.eliminareditarclientes #formulario li input{
+  margin-top: 10px;
+  width: 30%;
+  height: 30px;
+}  
+
 .eliminareditarclientes .encabezado{
   padding: 30px;
   
@@ -540,7 +565,7 @@ Body{
 }
 
 .eliminareditarclientes .encabezado input{
-  display: inline-block;
+  display: inline-flex;
 	width: 30%;
 	cursor: pointer;
   padding: 3px 3px;
@@ -610,6 +635,7 @@ Body{
   position: relative;
   transition: all 0.25s ease;
 }
+
 
 .Formularios button{
   border: 1px solid #2e518b; /*anchura, estilo y color borde*/
@@ -702,7 +728,7 @@ Body{
   margin: 5px;  
 }
 
-.registroclientes .datos button{
+.registroclientes .datos button, .botones button{
   margin-top: 100px;
 	background: #2B4e62;
 	color: #fff;
@@ -713,9 +739,27 @@ Body{
   margin: 5px;
   font-size: 20px;
   padding: 5px;
-
 }
 
+.registroclientes .datos button:hover{
+	background: #5597bd;
+	color: #0e171b;
+}
+
+.button_datagrid{
+  width: 150px;
+  border: none;
+  background-color: #2B4e62;
+  color: white;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.button_datagrid:hover{
+  transition: 0.2s ease;
+  background-color: #337ab7;
+
+}
 
 .registroclientes{
   min-height: 100vh;

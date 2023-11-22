@@ -83,7 +83,7 @@ const HistorialClientes = () =>{
             headerName: 'Eliminar',
             sortable: false,
             renderCell: (params) => (
-                <button onClick={() => handleEliminarCliente(params.row.id)}>
+                <button className='button_datagrid' onClick={() => handleEliminarCliente(params.row.id)}>
                     Eliminar
                 </button>
             ),
@@ -94,7 +94,7 @@ const HistorialClientes = () =>{
             headerName: 'Editar',
             sortable: false,
             renderCell: (params) => (
-                <button onClick={() => handleUpdateCliente(params.row.id)}>
+                <button className='button_datagrid' onClick={() => handleUpdateCliente(params.row.id)}>
                     Editar
                 </button>
             ),

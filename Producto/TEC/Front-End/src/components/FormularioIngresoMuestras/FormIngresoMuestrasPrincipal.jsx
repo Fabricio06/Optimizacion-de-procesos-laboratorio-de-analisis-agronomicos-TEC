@@ -55,9 +55,8 @@ const SampleForm = () => {
       setValue('cultivo', formulario.cultivo);
       setValue('boleta', formulario.boleta);
       setValue('fecha', obtenerFechaFormateada());
-
-
-        
+    
+      
     }
 }, [formulario, setValue]);
 

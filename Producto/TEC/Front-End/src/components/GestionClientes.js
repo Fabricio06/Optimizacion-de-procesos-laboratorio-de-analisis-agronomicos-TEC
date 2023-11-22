@@ -25,19 +25,19 @@ const GestionClientes = () =>{
         <section className='Body3'>
         <h1>Opciones Clientes</h1>
             <div className='options main-container'>
-                <div className='option2'>
+                <div className='option'>
                     <h3>Registro de clientes</h3>
                     <p>Registre a sus nuevos clientes</p>
                     <p>Ingrese <strong> <a href='/registroClientes'>aquí</a></strong></p>
                     <img src={Icono1}/>
                 </div>
-                <div className='option2'>
+                <div className='option'>
                     <h3>Historial de Formularios</h3>
                     <p>Acceda a los formularios de clientes</p>
                     <p>Ingrese <strong> <a href='/historialFormularios'>aquí</a></strong></p>
                     <img src={Icono2}/>
                 </div>
-                <div className='option2'>
+                <div className='option'>
                     <h3>Historial de clientes</h3>
                     <p>Verifique el historial de clientes y elimine si es necesario</p>
                     <p>Ingrese <strong><a href='/historialClientes'>aquí</a></strong></p>
